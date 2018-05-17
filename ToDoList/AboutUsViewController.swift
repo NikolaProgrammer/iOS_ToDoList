@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable class AboutUsViewController: UIViewController {
     
     //MARK: Properties
-    @IBOutlet weak var aboutUsInformation: UITextView!
+    @IBOutlet weak var logoView: UIView!
     
     //MARK: Initializators
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
