@@ -9,9 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,9 +24,10 @@ class ViewController: UIViewController {
         let controller = LicenseAgreementLiViewController(nibName: "LicenseAgreementLiViewController", bundle: nil)
         present(controller, animated: true, completion: nil)
     }
+    
     @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
-        let controller = AboutUsViewController(nibName: "AboutUsViewController", bundle: nil)
-        navigationController?.pushViewController(controller, animated: true)
+       let controller = AboutUsViewController(nibName: "AboutUsViewController", bundle: nil)
+       navigationController?.pushViewController(controller, animated: true)
     }
     
 }

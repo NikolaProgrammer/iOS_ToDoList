@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		918C636120AC5AC20018731C /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636020AC5AC20018731C /* RatingControl.swift */; };
 		91DB735820A46B180072956D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB735720A46B180072956D /* AppDelegate.swift */; };
 		91DB735A20A46B180072956D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB735920A46B180072956D /* ViewController.swift */; };
 		91DB735D20A46B180072956D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91DB735B20A46B180072956D /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		918C636020AC5AC20018731C /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingControl.swift; path = ../../test/test/RatingControl.swift; sourceTree = "<group>"; };
 		91DB735420A46B180072956D /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DB735720A46B180072956D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91DB735920A46B180072956D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,13 +109,14 @@
 			children = (
 				91DB735720A46B180072956D /* AppDelegate.swift */,
 				91DB735920A46B180072956D /* ViewController.swift */,
-				91DB735B20A46B180072956D /* Main.storyboard */,
 				91DB738920A48D140072956D /* AboutUsViewController.swift */,
-				91DB738A20A48D140072956D /* AboutUsViewController.xib */,
+				918C636020AC5AC20018731C /* RatingControl.swift */,
 				91DB738D20A4903D0072956D /* LicenseAgreementLiViewController.swift */,
+				91DB738A20A48D140072956D /* AboutUsViewController.xib */,
+				91DB735B20A46B180072956D /* Main.storyboard */,
 				91DB738E20A4903D0072956D /* LicenseAgreementLiViewController.xib */,
-				91DB735E20A46B1F0072956D /* Assets.xcassets */,
 				91DB736020A46B1F0072956D /* LaunchScreen.storyboard */,
+				91DB735E20A46B1F0072956D /* Assets.xcassets */,
 				91DB736320A46B1F0072956D /* Info.plist */,
 			);
 			path = ToDoList;
@@ -273,6 +276,7 @@
 				91DB738F20A4903D0072956D /* LicenseAgreementLiViewController.swift in Sources */,
 				91DB735A20A46B180072956D /* ViewController.swift in Sources */,
 				91DB738B20A48D140072956D /* AboutUsViewController.swift in Sources */,
+				918C636120AC5AC20018731C /* RatingControl.swift in Sources */,
 				91DB735820A46B180072956D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
