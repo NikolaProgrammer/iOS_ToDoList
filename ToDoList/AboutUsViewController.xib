@@ -24,30 +24,32 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyl-QP-Exb">
                     <rect key="frame" x="0.0" y="20" width="375" height="287"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INTERVALE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sf4-DR-Q0n">
-                            <rect key="frame" x="99" y="60" width="176" height="42"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4d3-Sa-9C2" customClass="RatingControl" customModule="ToDoList" customModuleProvider="target">
+                            <rect key="frame" x="61" y="207" width="252" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="176" id="u9X-bs-mWA"/>
+                                <constraint firstAttribute="width" constant="252" id="gQJ-IX-8OF"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="252" id="v13-iS-bv8"/>
+                                <constraint firstAttribute="height" constant="44" id="wF4-tK-a3v"/>
+                            </constraints>
+                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INTERVALE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sf4-DR-Q0n">
+                            <rect key="frame" x="99" y="100" width="176" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="60c-lS-8rE"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="176" id="9bi-B9-5l8"/>
+                                <constraint firstAttribute="width" constant="176" id="oBc-1A-SO6"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4d3-Sa-9C2" customClass="RatingControl" customModule="ToDoList" customModuleProvider="target">
-                            <rect key="frame" x="61" y="167" width="252" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="252" id="VNB-hZ-BO5"/>
-                            </constraints>
-                        </stackView>
                     </subviews>
                     <color key="backgroundColor" red="0.00042779440356951754" green="0.33830681550676656" blue="0.79410830639340557" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="4d3-Sa-9C2" secondAttribute="bottom" constant="76" id="15f-bq-82U"/>
-                        <constraint firstAttribute="bottom" secondItem="Sf4-DR-Q0n" secondAttribute="bottom" constant="185" id="7kF-fk-WGl"/>
-                        <constraint firstItem="Sf4-DR-Q0n" firstAttribute="centerX" secondItem="Kyl-QP-Exb" secondAttribute="centerX" id="Nke-Fq-fbZ"/>
-                        <constraint firstItem="4d3-Sa-9C2" firstAttribute="centerX" secondItem="Kyl-QP-Exb" secondAttribute="centerX" id="mpe-GD-lkq"/>
-                        <constraint firstItem="4d3-Sa-9C2" firstAttribute="top" secondItem="Sf4-DR-Q0n" secondAttribute="bottom" constant="65" id="vdw-7E-Sg3"/>
-                        <constraint firstItem="Sf4-DR-Q0n" firstAttribute="top" secondItem="Kyl-QP-Exb" secondAttribute="top" constant="60" id="yk2-nT-XOi"/>
+                        <constraint firstItem="Sf4-DR-Q0n" firstAttribute="top" secondItem="Kyl-QP-Exb" secondAttribute="top" constant="100" id="Rd5-bj-ckL"/>
+                        <constraint firstItem="4d3-Sa-9C2" firstAttribute="centerX" secondItem="Kyl-QP-Exb" secondAttribute="centerX" id="WmI-0V-mWb"/>
+                        <constraint firstItem="Sf4-DR-Q0n" firstAttribute="centerX" secondItem="Kyl-QP-Exb" secondAttribute="centerX" id="fWI-Qj-khW"/>
+                        <constraint firstItem="4d3-Sa-9C2" firstAttribute="top" secondItem="Sf4-DR-Q0n" secondAttribute="bottom" constant="65" id="yR2-K9-zS2"/>
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="iGG-HO-bSq">
