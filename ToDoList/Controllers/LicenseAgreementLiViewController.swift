@@ -34,6 +34,4 @@ import UIKit
     @IBAction func cancel(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
 }

@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		918C636120AC5AC20018731C /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636020AC5AC20018731C /* RatingControl.swift */; };
+		911205A920AEC25300E3D868 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205A820AEC25300E3D868 /* DateExtension.swift */; };
+		911205AC20AED01000E3D868 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205AB20AED01000E3D868 /* ServiceProtocol.swift */; };
+		918C636320AD9D640018731C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636220AD9D640018731C /* Task.swift */; };
+		918C636520ADA1930018731C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636420ADA1930018731C /* Service.swift */; };
+		918C636720ADA3E00018731C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636620ADA3E00018731C /* Category.swift */; };
+		918C636920ADB8AB0018731C /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636820ADB8AB0018731C /* TaskTableViewCell.swift */; };
 		91DB735820A46B180072956D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB735720A46B180072956D /* AppDelegate.swift */; };
-		91DB735A20A46B180072956D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB735920A46B180072956D /* ViewController.swift */; };
+		91DB735A20A46B180072956D /* TodayTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB735920A46B180072956D /* TodayTasksViewController.swift */; };
 		91DB735D20A46B180072956D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91DB735B20A46B180072956D /* Main.storyboard */; };
 		91DB735F20A46B1F0072956D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91DB735E20A46B1F0072956D /* Assets.xcassets */; };
 		91DB736220A46B1F0072956D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91DB736020A46B1F0072956D /* LaunchScreen.storyboard */; };
@@ -39,10 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		918C636020AC5AC20018731C /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingControl.swift; path = ../../test/test/RatingControl.swift; sourceTree = "<group>"; };
+		911205A520AEC12300E3D868 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		911205A820AEC25300E3D868 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		911205AB20AED01000E3D868 /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
+		918C636220AD9D640018731C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		918C636420ADA1930018731C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ToDoList/Model/Service.swift; sourceTree = SOURCE_ROOT; };
+		918C636620ADA3E00018731C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		918C636820ADB8AB0018731C /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		91DB735420A46B180072956D /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DB735720A46B180072956D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		91DB735920A46B180072956D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		91DB735920A46B180072956D /* TodayTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTasksViewController.swift; sourceTree = "<group>"; };
 		91DB735C20A46B180072956D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		91DB735E20A46B1F0072956D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91DB736120A46B1F0072956D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -84,6 +95,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		911205A120AEC0C100E3D868 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				911205AA20AECFBC00E3D868 /* Protocols */,
+				911205A720AEC23800E3D868 /* Extensions */,
+				918C636420ADA1930018731C /* Service.swift */,
+				918C636220AD9D640018731C /* Task.swift */,
+				918C636620ADA3E00018731C /* Category.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		911205A220AEC0FD00E3D868 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				91DB735920A46B180072956D /* TodayTasksViewController.swift */,
+				91DB738920A48D140072956D /* AboutUsViewController.swift */,
+				91DB738D20A4903D0072956D /* LicenseAgreementLiViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		911205A420AEC12200E3D868 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				918C636820ADB8AB0018731C /* TaskTableViewCell.swift */,
+				911205A520AEC12300E3D868 /* RatingControl.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		911205A620AEC19800E3D868 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				91DB735B20A46B180072956D /* Main.storyboard */,
+				91DB738A20A48D140072956D /* AboutUsViewController.xib */,
+				91DB738E20A4903D0072956D /* LicenseAgreementLiViewController.xib */,
+				91DB736020A46B1F0072956D /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		911205A720AEC23800E3D868 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				911205A820AEC25300E3D868 /* DateExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		911205AA20AECFBC00E3D868 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				911205AB20AED01000E3D868 /* ServiceProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		91DB734B20A46B180072956D = {
 			isa = PBXGroup;
 			children = (
@@ -108,14 +177,10 @@
 			isa = PBXGroup;
 			children = (
 				91DB735720A46B180072956D /* AppDelegate.swift */,
-				91DB735920A46B180072956D /* ViewController.swift */,
-				91DB738920A48D140072956D /* AboutUsViewController.swift */,
-				918C636020AC5AC20018731C /* RatingControl.swift */,
-				91DB738D20A4903D0072956D /* LicenseAgreementLiViewController.swift */,
-				91DB738A20A48D140072956D /* AboutUsViewController.xib */,
-				91DB735B20A46B180072956D /* Main.storyboard */,
-				91DB738E20A4903D0072956D /* LicenseAgreementLiViewController.xib */,
-				91DB736020A46B1F0072956D /* LaunchScreen.storyboard */,
+				911205A220AEC0FD00E3D868 /* Controllers */,
+				911205A120AEC0C100E3D868 /* Model */,
+				911205A420AEC12200E3D868 /* CustomView */,
+				911205A620AEC19800E3D868 /* View */,
 				91DB735E20A46B1F0072956D /* Assets.xcassets */,
 				91DB736320A46B1F0072956D /* Info.plist */,
 			);
@@ -274,10 +339,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				91DB738F20A4903D0072956D /* LicenseAgreementLiViewController.swift in Sources */,
-				91DB735A20A46B180072956D /* ViewController.swift in Sources */,
+				918C636520ADA1930018731C /* Service.swift in Sources */,
+				911205A920AEC25300E3D868 /* DateExtension.swift in Sources */,
+				918C636920ADB8AB0018731C /* TaskTableViewCell.swift in Sources */,
+				91DB735A20A46B180072956D /* TodayTasksViewController.swift in Sources */,
 				91DB738B20A48D140072956D /* AboutUsViewController.swift in Sources */,
-				918C636120AC5AC20018731C /* RatingControl.swift in Sources */,
+				918C636320AD9D640018731C /* Task.swift in Sources */,
 				91DB735820A46B180072956D /* AppDelegate.swift in Sources */,
+				918C636720ADA3E00018731C /* Category.swift in Sources */,
+				911205AC20AED01000E3D868 /* ServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

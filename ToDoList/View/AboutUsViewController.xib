@@ -80,7 +80,7 @@
                 <constraint firstItem="Izo-gP-RF0" firstAttribute="trailing" secondItem="iGG-HO-bSq" secondAttribute="trailing" constant="16" id="uJu-zR-rwR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Izo-gP-RF0"/>
-            <point key="canvasLocation" x="-68.5" y="-306.5"/>
+            <point key="canvasLocation" x="-226" y="-319"/>
         </view>
     </objects>
 </document>
