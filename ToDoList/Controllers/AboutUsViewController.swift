@@ -21,12 +21,4 @@ import UIKit
         super.init(nibName: "AboutUsViewController", bundle: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
 }
