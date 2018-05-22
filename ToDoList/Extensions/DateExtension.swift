@@ -11,12 +11,12 @@ extension Date {
         return formatter
     }
     
-    static func date(from string: String) -> Date {
-        return getDateFormatter().date(from: string)!
+    static func date(from string: String, formatter: DateFormatter = getDateFormatter()) -> Date {
+        return formatter.date(from: string)!
     }
     
-    static func string(from date: Date) -> String {
-        return getDateFormatter().string(from: date)
+    static func string(from date: Date, formatter: DateFormatter = getDateFormatter()) -> String {
+        return formatter.string(from: date)
     }
     
 }

@@ -2,7 +2,7 @@
 import UIKit
 
 class Service: ServiceProtocol {
-  
+    
     //MARK: Properties
     static let shared = Service()
     
@@ -19,6 +19,13 @@ class Service: ServiceProtocol {
     }
     
     //MARK: ServiceProtocol Methods
+    
+    func getTodayTasks() -> [Task] {
+        return tasks.filter({ (task) -> Bool in
+            return task.taskCompletionDate <= Date()
+        })
+    }
+    
     func addTask(task: Task) {
         tasks.append(task)
         

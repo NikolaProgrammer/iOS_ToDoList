@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodayTasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TodayTasksViewController: UIViewController {
     
     var todayTasks: [Task] = []
     
@@ -25,19 +25,27 @@ class TodayTasksViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todayTasks = Service.shared.tasks.filter({ (task) -> Bool in
-            return task.taskCompletionDate <= Date()
-        })
-        
+        todayTasks = Service.shared.getTodayTasks()
     }
     
+    //MARK: Actions
+    @IBAction func showLicenseAgreement(_ sender: UIButton) {
+        let controller = LicenseAgreementLiViewController()
+        present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
+       let controller = AboutUsViewController()
+       show(controller, sender: self)
+    }
+    
+}
+
+//MARK: - UITableViewDataSource
+extension TodayTasksViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todayTasks.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,16 +64,13 @@ class TodayTasksViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    //MARK: Actions
-    @IBAction func showLicenseAgreement(_ sender: UIButton) {
-        let controller = LicenseAgreementLiViewController()
-        present(controller, animated: true, completion: nil)
-    }
-    
-    @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
-       let controller = AboutUsViewController()
-       show(controller, sender: self)
-    }
-    
 }
+
+
+
+
+
+
+
+
 
