@@ -19,13 +19,16 @@ class TodayTasksViewController: UIViewController, UITableViewDelegate, UITableVi
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        tabBarItem = UITabBarItem(title: "Today", image: UIImage(named: "todaySection"), tag: 0)
+        tabBarItem = UITabBarItem(title: "Today", image: UIImage(named: Constants.todaySectionImageName), tag: 0)
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         todayTasks = Service.shared.tasks.filter({ (task) -> Bool in
             return task.taskCompletionDate <= Date()
         })
+        
     }
     
     
@@ -39,9 +42,7 @@ class TodayTasksViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let identifier = "TaskTableViewCell"
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? TaskTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier, for: indexPath) as? TaskTableViewCell else {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
         
@@ -63,7 +64,7 @@ class TodayTasksViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
        let controller = AboutUsViewController()
-       navigationController?.show(controller, sender: self)
+       show(controller, sender: self)
     }
     
 }

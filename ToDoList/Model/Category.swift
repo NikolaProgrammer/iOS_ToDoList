@@ -2,7 +2,7 @@
 
 import UIKit
 
-class Category {
+struct Category {
     
     //MARK: Properties
     var categoryId: Int

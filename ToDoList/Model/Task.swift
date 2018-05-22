@@ -1,13 +1,13 @@
 
 import UIKit
 
-class Task {
+struct Task {
     
     //MARK: Properties
     var taskName: String
     var taskNotes: String
     var taskCompletionDate: Date
-    unowned var category: Category
+    var category: Category
     
     //MARK: Initializators
     init(taskName: String, taskNotes: String, taskCompletionDate: Date, category: Category) {

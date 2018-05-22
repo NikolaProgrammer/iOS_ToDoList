@@ -7,7 +7,7 @@ class Service: ServiceProtocol {
     static let shared = Service()
     
     var tasks: [Task]!
-    private static let categories: [Category] = [
+    private static var categories: [Category] = [
         Category(categoryId: 0, categoryName: "Inbox"),
         Category(categoryId: 1, categoryName: "Work"),
         Category(categoryId: 2, categoryName: "My")
@@ -22,10 +22,10 @@ class Service: ServiceProtocol {
     func addTask(task: Task) {
         tasks.append(task)
         
-        guard let index = findCategoryIndex(for: task.category) else {
+        guard let index = Service.categories.index(of: task.category) else {
             fatalError("No such category")
         }
-        
+            
         Service.categories[index].includedTasks.append(task)
     }
     
@@ -48,14 +48,6 @@ class Service: ServiceProtocol {
         return [firstTask, secondTask, thirdTask, finishedTask]
     }
     
-    private func findCategoryIndex(for categoryToFind: Category) -> Int?{
-        for (index, category) in Service.categories.enumerated() {
-            if category == categoryToFind {
-                return index
-            }
-        }
-        return nil
-    }
 }
 
 /**

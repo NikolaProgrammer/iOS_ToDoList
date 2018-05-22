@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		911205A920AEC25300E3D868 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205A820AEC25300E3D868 /* DateExtension.swift */; };
 		911205AC20AED01000E3D868 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205AB20AED01000E3D868 /* ServiceProtocol.swift */; };
+		911205AE20AEEF1000E3D868 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205AD20AEEF1000E3D868 /* AboutUsViewController.swift */; };
+		911205B020AEEF6A00E3D868 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205AF20AEEF6A00E3D868 /* Constants.swift */; };
 		918C636320AD9D640018731C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636220AD9D640018731C /* Task.swift */; };
 		918C636520ADA1930018731C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636420ADA1930018731C /* Service.swift */; };
 		918C636720ADA3E00018731C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636620ADA3E00018731C /* Category.swift */; };
@@ -20,7 +22,6 @@
 		91DB736220A46B1F0072956D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91DB736020A46B1F0072956D /* LaunchScreen.storyboard */; };
 		91DB736D20A46B1F0072956D /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB736C20A46B1F0072956D /* ToDoListTests.swift */; };
 		91DB737820A46B1F0072956D /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB737720A46B1F0072956D /* ToDoListUITests.swift */; };
-		91DB738B20A48D140072956D /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB738920A48D140072956D /* AboutUsViewController.swift */; };
 		91DB738C20A48D140072956D /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DB738A20A48D140072956D /* AboutUsViewController.xib */; };
 		91DB738F20A4903D0072956D /* LicenseAgreementLiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB738D20A4903D0072956D /* LicenseAgreementLiViewController.swift */; };
 		91DB739020A4903D0072956D /* LicenseAgreementLiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DB738E20A4903D0072956D /* LicenseAgreementLiViewController.xib */; };
@@ -47,6 +48,8 @@
 		911205A520AEC12300E3D868 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		911205A820AEC25300E3D868 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		911205AB20AED01000E3D868 /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
+		911205AD20AEEF1000E3D868 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		911205AF20AEEF6A00E3D868 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		918C636220AD9D640018731C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		918C636420ADA1930018731C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ToDoList/Model/Service.swift; sourceTree = SOURCE_ROOT; };
 		918C636620ADA3E00018731C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -64,7 +67,6 @@
 		91DB737320A46B1F0072956D /* ToDoListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DB737720A46B1F0072956D /* ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITests.swift; sourceTree = "<group>"; };
 		91DB737920A46B1F0072956D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		91DB738920A48D140072956D /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		91DB738A20A48D140072956D /* AboutUsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
 		91DB738D20A4903D0072956D /* LicenseAgreementLiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseAgreementLiViewController.swift; sourceTree = "<group>"; };
 		91DB738E20A4903D0072956D /* LicenseAgreementLiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LicenseAgreementLiViewController.xib; sourceTree = "<group>"; };
@@ -99,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				911205AA20AECFBC00E3D868 /* Protocols */,
-				911205A720AEC23800E3D868 /* Extensions */,
 				918C636420ADA1930018731C /* Service.swift */,
 				918C636220AD9D640018731C /* Task.swift */,
 				918C636620ADA3E00018731C /* Category.swift */,
@@ -111,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				91DB735920A46B180072956D /* TodayTasksViewController.swift */,
-				91DB738920A48D140072956D /* AboutUsViewController.swift */,
+				911205AD20AEEF1000E3D868 /* AboutUsViewController.swift */,
 				91DB738D20A4903D0072956D /* LicenseAgreementLiViewController.swift */,
 			);
 			path = Controllers;
@@ -177,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				91DB735720A46B180072956D /* AppDelegate.swift */,
+				911205AF20AEEF6A00E3D868 /* Constants.swift */,
+				911205A720AEC23800E3D868 /* Extensions */,
 				911205A220AEC0FD00E3D868 /* Controllers */,
 				911205A120AEC0C100E3D868 /* Model */,
 				911205A420AEC12200E3D868 /* CustomView */,
@@ -338,12 +341,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				911205AE20AEEF1000E3D868 /* AboutUsViewController.swift in Sources */,
+				911205B020AEEF6A00E3D868 /* Constants.swift in Sources */,
 				91DB738F20A4903D0072956D /* LicenseAgreementLiViewController.swift in Sources */,
 				918C636520ADA1930018731C /* Service.swift in Sources */,
 				911205A920AEC25300E3D868 /* DateExtension.swift in Sources */,
 				918C636920ADB8AB0018731C /* TaskTableViewCell.swift in Sources */,
 				91DB735A20A46B180072956D /* TodayTasksViewController.swift in Sources */,
-				91DB738B20A48D140072956D /* AboutUsViewController.swift in Sources */,
 				918C636320AD9D640018731C /* Task.swift in Sources */,
 				91DB735820A46B180072956D /* AppDelegate.swift in Sources */,
 				918C636720ADA3E00018731C /* Category.swift in Sources */,
