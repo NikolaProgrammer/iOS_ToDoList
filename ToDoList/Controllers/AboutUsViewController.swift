@@ -13,12 +13,4 @@ import UIKit
     //MARK: Properties
     @IBOutlet weak var logoView: UIView!
     
-    //MARK: Initializators
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: "AboutUsViewController", bundle: nil)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(nibName: "AboutUsViewController", bundle: nil)
-    }
-    
 }

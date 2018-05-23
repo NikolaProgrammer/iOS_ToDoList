@@ -10,18 +10,8 @@ import UIKit
 
 @IBDesignable class LicenseAgreementLiViewController: UIViewController {
 
-    //MARK: Initializators
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     //MARK: Actions
     @IBAction func cancel(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
 }
