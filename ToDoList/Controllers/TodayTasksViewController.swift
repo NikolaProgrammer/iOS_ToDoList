@@ -34,6 +34,14 @@ class TodayTasksViewController: UIViewController {
         present(controller, animated: true, completion: nil)
     }
     
+    @IBAction func unwindToTodayTaskList(sender: UIStoryboardSegue){
+        if let sourceController = sender.source as? AddTaskTableViewController, let task = sourceController.task {
+            let indexPath = IndexPath(row: todayTasks.count, section: 0)
+            todayTasks.append(task)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
     @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
        let controller = AboutUsViewController()
        show(controller, sender: self)
@@ -56,9 +64,9 @@ extension TodayTasksViewController: UITableViewDataSource {
         
         let task = todayTasks[indexPath.row]
         
-        cell.titleLabel.text = task.taskName
-        cell.noteLabel.text = task.taskNotes
-        cell.dateLabel.text = Date.string(from: task.taskCompletionDate)
+        cell.titleLabel.text = task.name
+        cell.noteLabel.text = task.notes
+        cell.dateLabel.text = Date.string(from: task.date)
         
         
         return cell

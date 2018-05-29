@@ -5,18 +5,18 @@ private let format = "dd.MM.yyyy"
 
 extension Date {
     
-    private static func getDateFormatter() -> DateFormatter {
+    private static func getDateFormatter(pattern: String) -> DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = format
+        formatter.dateFormat = pattern
         return formatter
     }
     
-    static func date(from string: String, formatter: DateFormatter = getDateFormatter()) -> Date {
-        return formatter.date(from: string)!
+    static func date(from string: String, format: String = format) -> Date {
+        return Date.getDateFormatter(pattern: format).date(from: string)!
     }
     
-    static func string(from date: Date, formatter: DateFormatter = getDateFormatter()) -> String {
-        return formatter.string(from: date)
+    static func string(from date: Date, format: String = format) -> String {
+        return Date.getDateFormatter(pattern: format).string(from: date)
     }
     
 }
