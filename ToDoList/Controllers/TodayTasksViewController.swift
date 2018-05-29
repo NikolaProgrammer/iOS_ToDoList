@@ -25,7 +25,7 @@ class TodayTasksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todayTasks = Service.shared.getTodayTasks()
+        updateTodayTasks()
     }
     
     //MARK: Actions
@@ -36,15 +36,20 @@ class TodayTasksViewController: UIViewController {
     
     @IBAction func unwindToTodayTaskList(sender: UIStoryboardSegue){
         if let sourceController = sender.source as? AddTaskTableViewController, let task = sourceController.task {
-            let indexPath = IndexPath(row: todayTasks.count, section: 0)
-            todayTasks.append(task)
-            tableView.insertRows(at: [indexPath], with: .automatic)
+            Service.shared.addTask(task: task)
+            updateTodayTasks()
+            tableView.reloadData()
         }
     }
     
     @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
        let controller = AboutUsViewController()
        show(controller, sender: self)
+    }
+    
+    //MARK: Private Methods
+    private func updateTodayTasks() {
+        todayTasks = Service.shared.getTodayTasks()
     }
     
 }
