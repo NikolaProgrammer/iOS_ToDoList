@@ -28,19 +28,19 @@ class TodayTasksViewController: UIViewController {
         updateTodayTasks()
     }
     
-    //MARK: Actions
-    @IBAction func showLicenseAgreement(_ sender: UIButton) {
-        let controller = LicenseAgreementLiViewController()
-        present(controller, animated: true, completion: nil)
-    }
-    
-    @IBAction func unwindToTodayTaskList(sender: UIStoryboardSegue){
-        if let sourceController = sender.source as? AddTaskTableViewController, let task = sourceController.task {
-            Service.shared.addTask(task: task)
-            updateTodayTasks()
-            tableView.reloadData()
+    //MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == Constants.addTaskSegueIdentifier, let navigationController = segue.destination as? UINavigationController {
+            guard let destinationController = navigationController.topViewController as? AddTaskTableViewController else {
+                fatalError("Unexpected destination")
+            }
+            destinationController.delegate = self
         }
     }
+    
+    //MARK: Actions
     
     @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
        let controller = AboutUsViewController()
@@ -79,6 +79,14 @@ extension TodayTasksViewController: UITableViewDataSource {
     
 }
 
+
+extension TodayTasksViewController: AddTaskViewControllerDelegate {
+    func addTaskViewControllerDidSaveButton(_ view: AddTaskTableViewController) {
+        Service.shared.addTask(task: view.task!)
+        updateTodayTasks()
+        tableView.reloadData()
+    }
+}
 
 
 

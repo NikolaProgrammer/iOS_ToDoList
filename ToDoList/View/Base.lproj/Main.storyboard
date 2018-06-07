@@ -93,7 +93,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Osd-b3-L9O">
                             <connections>
-                                <segue destination="rbd-dQ-nCs" kind="presentation" identifier="AddTask" id="enh-hZ-Ih5"/>
+                                <segue destination="H2F-Wj-kbE" kind="presentation" identifier="AddTaskSegue" id="enh-hZ-Ih5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -113,29 +113,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="LaY-PJ-k0E">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Add Item" id="Cbw-Od-5iG">
-                                    <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0Jh-Dt-ri4">
-                                        <connections>
-                                            <action selector="cancel:" destination="rbd-dQ-nCs" id="5dc-6d-Q04"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem key="rightBarButtonItem" systemItem="save" id="5ka-CK-KbC">
-                                        <connections>
-                                            <segue destination="NQu-6k-Zgw" kind="unwind" unwindAction="unwindToTodayTaskListWithSender:" id="fZZ-9k-5D3"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
                         <sections>
                             <tableViewSection headerTitle="TASK" id="3UV-7D-XWW">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="GOH-Bv-MdF">
-                                        <rect key="frame" x="0.0" y="99.5" width="375" height="51"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GOH-Bv-MdF" id="0PB-lX-DqO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
@@ -146,6 +128,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="rbd-dQ-nCs" id="w2j-oB-p6U"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -160,7 +145,7 @@
                             <tableViewSection headerTitle="REMINDER" id="8lv-aF-eSf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="49" id="wM7-Gd-kmh">
-                                        <rect key="frame" x="0.0" y="206.5" width="375" height="49"/>
+                                        <rect key="frame" x="0.0" y="162.5" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wM7-Gd-kmh" id="OT4-pl-p2U">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
@@ -185,7 +170,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="43" id="IuA-6K-iB5">
-                                        <rect key="frame" x="0.0" y="255.5" width="375" height="43"/>
+                                        <rect key="frame" x="0.0" y="211.5" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IuA-6K-iB5" id="ddf-wc-vJO">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="42.5"/>
@@ -205,7 +190,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="mzE-Ov-0bW" kind="presentation" identifier="ChooseDate" id="VH7-ct-nCa"/>
+                                            <segue destination="mzE-Ov-0bW" kind="show" identifier="ChooseDateSegue" id="VH7-ct-nCa"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -213,7 +198,7 @@
                             <tableViewSection headerTitle="PRIORITY" id="wux-T7-nlG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="spL-WH-hkk" detailTextLabel="4jS-1g-1sM" rowHeight="55" style="IBUITableViewCellStyleValue1" id="xIg-0O-g63">
-                                        <rect key="frame" x="0.0" y="354.5" width="375" height="55"/>
+                                        <rect key="frame" x="0.0" y="310.5" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xIg-0O-g63" id="3Yd-Cr-GtB">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="54.5"/>
@@ -241,7 +226,7 @@
                             <tableViewSection headerTitle="NOTES" id="US6-81-m9N">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="100" id="GnQ-aD-huc">
-                                        <rect key="frame" x="0.0" y="465.5" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="421.5" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GnQ-aD-huc" id="9pF-p1-tNj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
@@ -277,6 +262,7 @@
                             <outlet property="delegate" destination="rbd-dQ-nCs" id="OiB-z0-kNt"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="V0j-SO-Md4"/>
                     <connections>
                         <outlet property="dateLabel" destination="cc5-HQ-tcd" id="zbf-po-0fF"/>
                         <outlet property="nameTextField" destination="knL-yj-atE" id="Eq6-ht-lIm"/>
@@ -284,13 +270,11 @@
                         <outlet property="priorityLabel" destination="4jS-1g-1sM" id="95F-Z1-0X6"/>
                         <outlet property="priorityTableViewCell" destination="xIg-0O-g63" id="gDk-6f-F8r"/>
                         <outlet property="reminderSwitch" destination="fKM-Kb-sgc" id="2FA-iz-ucn"/>
-                        <outlet property="saveButton" destination="5ka-CK-KbC" id="x40-CY-y3m"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhb-jk-l0b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="NQu-6k-Zgw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3072.8000000000002" y="769.56521739130437"/>
+            <point key="canvasLocation" x="3881" y="324"/>
         </scene>
         <!--Date Selector View Controller-->
         <scene sceneID="TrV-Ym-afP">
@@ -301,7 +285,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPD-3h-3Ub">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="Choose Date" id="SiB-Jy-buc">
@@ -333,7 +317,7 @@
                                 </connections>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CT-10-aVE">
-                                <rect key="frame" x="0.0" y="129" width="375" height="21"/>
+                                <rect key="frame" x="0.0" y="173" width="375" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -361,7 +345,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dND-VL-hq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="j1x-qx-p7x" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3919" y="770"/>
+            <point key="canvasLocation" x="4856.8000000000002" y="769.56521739130437"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KzU-vr-boO">
@@ -450,6 +434,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1AE-Rn-AUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1344.8" y="769.56521739130437"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UMi-cf-3Ls">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H2F-Wj-kbE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pnz-0h-29F">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rbd-dQ-nCs" kind="relationship" relationship="rootViewController" id="cOu-Ij-sqp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwP-lP-E45" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3110" y="324"/>
         </scene>
     </scenes>
 </document>

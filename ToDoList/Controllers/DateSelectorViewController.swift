@@ -13,12 +13,12 @@ class DateSelectorViewController: UIViewController {
     //MARK: Properties
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var label: UILabel!
-    var shownDate: String?
+    var selectedDateString: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        label.text = shownDate
+        label.text = selectedDateString
     }
     
     //MARK: Actions

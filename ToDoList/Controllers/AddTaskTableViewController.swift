@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AddTaskViewControllerDelegate: class {
+    func addTaskViewControllerDidSaveButton(_ view: AddTaskTableViewController)
+}
+
 class AddTaskTableViewController: UITableViewController {
     
     //MARK: Properties
@@ -17,24 +21,29 @@ class AddTaskTableViewController: UITableViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var priorityLabel: UILabel!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
+
     var task: Task?
+    var saveButton: UIBarButtonItem!
+    
+    weak var delegate: AddTaskViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveButton.isEnabled = false
-        nameTextField.delegate = self
+        dateLabel.text = Date.string(from: Date(), format: Constants.fullDatePattern)
+        
         configureGestures()
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(chancgeKeyboardState))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(closeTextViewKeyboard))
         toolBar.items = [flexibleSpace, doneButton]
-        
         notesTextView.inputAccessoryView = toolBar
-        
+    
+        title = "Add Item"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
+
         self.tableView.tableFooterView = UIView()
     }
 
@@ -43,49 +52,47 @@ class AddTaskTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        if segue.identifier == "ChooseDate" {
+        if segue.identifier == Constants.chooseDateSegueIdentifier {
             guard let dateSelectorController = segue.destination as? DateSelectorViewController else {
                 fatalError("Unexpected destination")
             }
             
-            dateSelectorController.shownDate = dateLabel.text
-        } else {
-            
-            guard let button = sender as? UIBarButtonItem, button === saveButton else {
-                fatalError("The save button was not presented, cancelling")
-            }
-            
-            let name = nameTextField.text ?? ""
-            let isReminded = reminderSwitch.isOn
-            let date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
-            let priority = Priority(rawValue: priorityLabel.text!)!
-            let notes = notesTextView.text ?? ""
-            
-            task = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
+            dateSelectorController.selectedDateString = dateLabel.text
         }
 
     }
     
     
     //MARK: Actions
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func datePickerDidReturn(sender: UIStoryboardSegue) {
         if let source = sender.source as? DateSelectorViewController {
             dateLabel.text = source.label.text
-            updateSaveButtonState()
         }
     }
     
     //MARK: Private Methods
     
+    @objc private func saveButtonTapped() {
+        let name = nameTextField.text ?? ""
+        let isReminded = reminderSwitch.isOn
+        let date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
+        let priority = Priority(rawValue: priorityLabel.text!)!
+        let notes = notesTextView.text ?? ""
+        
+        task = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
+        
+        delegate?.addTaskViewControllerDidSaveButton(self)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func cancel() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     private func updateSaveButtonState() {
         let text = nameTextField.text ?? ""
-        let date = dateLabel.text ?? ""
-        print(date)
-        saveButton.isEnabled = !text.isEmpty && date != "Date"
+        saveButton.isEnabled = !text.isEmpty 
     }
     
     private func configureGestures() {
@@ -93,7 +100,7 @@ class AddTaskTableViewController: UITableViewController {
         priorityTableViewCell.addGestureRecognizer(actionSheetGesture)
     }
     
-    @objc private func chancgeKeyboardState() {
+    @objc private func closeTextViewKeyboard() {
         if notesTextView.isFirstResponder {
             notesTextView.resignFirstResponder()
         }
@@ -103,24 +110,14 @@ class AddTaskTableViewController: UITableViewController {
         let actionSheet = UIAlertController(title: "Select priority", message: nil, preferredStyle: .actionSheet)
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let none = UIAlertAction(title: "None", style: .default) { action in
-            self.priorityLabel.text = "None"
-        }
-        let low = UIAlertAction(title: "Low", style: .default) { action in
-            self.priorityLabel.text = "Low"
-        }
-        let medium = UIAlertAction(title: "Medium", style: .default) { action in
-            self.priorityLabel.text = "Medium"
-        }
-        let high = UIAlertAction(title: "High", style: .default) { action in
-            self.priorityLabel.text = "High"
-        }
-        
         actionSheet.addAction(cancel)
-        actionSheet.addAction(none)
-        actionSheet.addAction(low)
-        actionSheet.addAction(medium)
-        actionSheet.addAction(high)
+        
+        for priority in Priority.values {
+            let action = UIAlertAction(title: priority, style: .default) { action in
+                self.priorityLabel.text = priority
+            }
+            actionSheet.addAction(action)
+        }
         
         present(actionSheet, animated: true, completion: nil)
     }
@@ -135,17 +132,3 @@ extension AddTaskTableViewController: UITextFieldDelegate {
         return true
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
