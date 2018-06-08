@@ -25,18 +25,31 @@ class TodayTasksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todayTasks = Service.shared.getTodayTasks()
+        updateTodayTasks()
+    }
+    
+    //MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == Constants.addTaskSegueIdentifier, let navigationController = segue.destination as? UINavigationController {
+            guard let destinationController = navigationController.topViewController as? AddTaskTableViewController else {
+                fatalError("Unexpected destination")
+            }
+            destinationController.delegate = self
+        }
     }
     
     //MARK: Actions
-    @IBAction func showLicenseAgreement(_ sender: UIButton) {
-        let controller = LicenseAgreementLiViewController()
-        present(controller, animated: true, completion: nil)
-    }
     
     @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
        let controller = AboutUsViewController()
        show(controller, sender: self)
+    }
+    
+    //MARK: Private Methods
+    private func updateTodayTasks() {
+        todayTasks = Service.shared.getTodayTasks()
     }
     
 }
@@ -56,9 +69,9 @@ extension TodayTasksViewController: UITableViewDataSource {
         
         let task = todayTasks[indexPath.row]
         
-        cell.titleLabel.text = task.taskName
-        cell.noteLabel.text = task.taskNotes
-        cell.dateLabel.text = Date.string(from: task.taskCompletionDate)
+        cell.titleLabel.text = task.name
+        cell.noteLabel.text = task.notes
+        cell.dateLabel.text = Date.string(from: task.date)
         
         
         return cell
@@ -66,6 +79,16 @@ extension TodayTasksViewController: UITableViewDataSource {
     
 }
 
+
+extension TodayTasksViewController: AddTaskViewControllerDelegate {
+    func addTaskViewControllerDidSaveButton(_ view: AddTaskTableViewController) {
+        Service.shared.addTask(task: view.task!)
+        updateTodayTasks()
+        tableView.reloadData()
+        
+        view.dismiss(animated: true, completion: nil)
+    }
+}
 
 
 
