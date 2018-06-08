@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xDL-BY-dvd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xDL-BY-dvd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -219,7 +219,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <gestureRecognizers/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="gBF-Hz-VGO" appends="YES" id="Qmm-dr-xoD"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -268,13 +272,17 @@
                         <outlet property="nameTextField" destination="knL-yj-atE" id="Eq6-ht-lIm"/>
                         <outlet property="notesTextView" destination="mq4-e8-D7s" id="zo5-dA-Lui"/>
                         <outlet property="priorityLabel" destination="4jS-1g-1sM" id="95F-Z1-0X6"/>
-                        <outlet property="priorityTableViewCell" destination="xIg-0O-g63" id="gDk-6f-F8r"/>
                         <outlet property="reminderSwitch" destination="fKM-Kb-sgc" id="2FA-iz-ucn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhb-jk-l0b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="gBF-Hz-VGO">
+                    <connections>
+                        <action selector="showPriorityActionList:" destination="rbd-dQ-nCs" id="gdl-V8-R3G"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3881" y="324"/>
+            <point key="canvasLocation" x="3982" y="770"/>
         </scene>
         <!--Date Selector View Controller-->
         <scene sceneID="TrV-Ym-afP">
@@ -451,7 +459,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iwP-lP-E45" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3110" y="324"/>
+            <point key="canvasLocation" x="3143" y="424"/>
         </scene>
     </scenes>
 </document>

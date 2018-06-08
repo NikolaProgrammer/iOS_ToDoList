@@ -17,7 +17,6 @@ class AddTaskTableViewController: UITableViewController {
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var reminderSwitch: UISwitch!
-    @IBOutlet weak var priorityTableViewCell: UITableViewCell!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var priorityLabel: UILabel!
@@ -32,8 +31,6 @@ class AddTaskTableViewController: UITableViewController {
         
         dateLabel.text = Date.string(from: Date(), format: Constants.fullDatePattern)
         
-        configureGestures()
-        
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(closeTextViewKeyboard))
@@ -41,10 +38,13 @@ class AddTaskTableViewController: UITableViewController {
         notesTextView.inputAccessoryView = toolBar
     
         title = "Add Item"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
+        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
 
         self.tableView.tableFooterView = UIView()
+        
+        updateSaveButtonState()
     }
 
     // MARK: - Navigation
@@ -69,44 +69,7 @@ class AddTaskTableViewController: UITableViewController {
             dateLabel.text = source.label.text
         }
     }
-    
-    //MARK: Private Methods
-    
-    @objc private func saveButtonTapped() {
-        let name = nameTextField.text ?? ""
-        let isReminded = reminderSwitch.isOn
-        let date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
-        let priority = Priority(rawValue: priorityLabel.text!)!
-        let notes = notesTextView.text ?? ""
-        
-        task = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
-        
-        delegate?.addTaskViewControllerDidSaveButton(self)
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc private func cancel() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    private func updateSaveButtonState() {
-        let text = nameTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty 
-    }
-    
-    private func configureGestures() {
-        let actionSheetGesture = UITapGestureRecognizer(target: self, action: #selector(showPriorityActionSheet))
-        priorityTableViewCell.addGestureRecognizer(actionSheetGesture)
-    }
-    
-    @objc private func closeTextViewKeyboard() {
-        if notesTextView.isFirstResponder {
-            notesTextView.resignFirstResponder()
-        }
-    }
-
-    @objc private func showPriorityActionSheet() {
+    @IBAction func showPriorityActionList(_ sender: UITapGestureRecognizer) {
         let actionSheet = UIAlertController(title: "Select priority", message: nil, preferredStyle: .actionSheet)
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -121,6 +84,36 @@ class AddTaskTableViewController: UITableViewController {
         
         present(actionSheet, animated: true, completion: nil)
     }
+    
+    //MARK: Private Methods
+    
+    @objc private func saveButtonTapped() {
+        let name = nameTextField.text ?? ""
+        let isReminded = reminderSwitch.isOn
+        let date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
+        let priority = Priority(rawValue: priorityLabel.text!)!
+        let notes = notesTextView.text ?? ""
+        
+        task = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
+        
+        delegate?.addTaskViewControllerDidSaveButton(self)
+    }
+    
+    @objc private func cancelButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func updateSaveButtonState() {
+        let text = nameTextField.text ?? ""
+        saveButton.isEnabled = !text.isEmpty 
+    }
+    
+    @objc private func closeTextViewKeyboard() {
+        if notesTextView.isFirstResponder {
+            notesTextView.resignFirstResponder()
+        }
+    }
+
     
 }
 

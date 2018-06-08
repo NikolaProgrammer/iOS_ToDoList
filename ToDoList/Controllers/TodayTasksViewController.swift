@@ -85,6 +85,8 @@ extension TodayTasksViewController: AddTaskViewControllerDelegate {
         Service.shared.addTask(task: view.task!)
         updateTodayTasks()
         tableView.reloadData()
+        
+        view.dismiss(animated: true, completion: nil)
     }
 }
 
