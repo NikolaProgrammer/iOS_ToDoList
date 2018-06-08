@@ -10,11 +10,10 @@ import UIKit
 
 class TodayTasksViewController: UIViewController {
     
-    var todayTasks: [Task] = []
-    
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
-   
+    var todayTasks: [Task] = []
+    
     //MARK: Initializators
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,12 +31,31 @@ class TodayTasksViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        if segue.identifier == Constants.addTaskSegueIdentifier, let navigationController = segue.destination as? UINavigationController {
-            guard let destinationController = navigationController.topViewController as? AddTaskTableViewController else {
+        var destinationController: TaskTableViewController
+        
+        switch segue.identifier {
+        case Constants.addTaskSegueIdentifier:
+            guard let navigationController = segue.destination as? UINavigationController else {
                 fatalError("Unexpected destination")
             }
-            destinationController.delegate = self
+            destinationController = navigationController.topViewController as! TaskTableViewController
+        case Constants.showTaskDetailsIdentifier:
+            guard let destination = segue.destination as? TaskTableViewController else {
+                fatalError("Unexpected destination")
+            }
+            destinationController = destination
+            guard let selectedTask = sender as? TaskTableViewCell else {
+                fatalError("Unexpected sender \(String(describing: sender))")
+            }
+            guard let indexPath = tableView.indexPath(for: selectedTask) else {
+                fatalError("Selected task is not displayed on the screen")
+            }
+            destinationController.task = todayTasks[indexPath.row]
+        default:
+            fatalError("Unknown identifier \(String(describing: segue.identifier))")
         }
+        
+        destinationController.delegate = self
     }
     
     //MARK: Actions
@@ -79,21 +97,32 @@ extension TodayTasksViewController: UITableViewDataSource {
     
 }
 
-
-extension TodayTasksViewController: AddTaskViewControllerDelegate {
-    func addTaskViewControllerDidSaveButton(_ view: AddTaskTableViewController) {
-        Service.shared.addTask(task: view.task!)
-        updateTodayTasks()
-        tableView.reloadData()
-        
-        view.dismiss(animated: true, completion: nil)
+extension TodayTasksViewController: TaskViewControllerDelegate {
+    func taskViewControllerDidCancelButton(_ view: TaskTableViewController) {
+        if (tableView.indexPathForSelectedRow != nil) {
+            view.navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    func taskViewControllerDidSaveButton(_ view: TaskTableViewController) {
+        if (tableView.indexPathForSelectedRow != nil) {
+            Service.shared.changeTask(oldTask: view.task!, newTask: view.newTask!)
+            
+            updateTodayTasks()
+            tableView.reloadData()
+            
+            view.navigationController?.popViewController(animated: true)
+        } else {
+            Service.shared.addTask(task: view.newTask!)
+            
+            updateTodayTasks()
+            tableView.reloadData()
+            
+            view.dismiss(animated: true, completion: nil)
+        }
+ 
     }
 }
-
-
-
-
-
-
-
-

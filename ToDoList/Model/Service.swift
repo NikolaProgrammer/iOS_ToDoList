@@ -22,7 +22,7 @@ class Service: ServiceProtocol {
     
     func getTodayTasks() -> [Task] {
         return tasks.filter({ (task) -> Bool in
-            return task.date <= Date()
+            return task.date <= Date().tomorrow
         })
     }
     
@@ -34,6 +34,14 @@ class Service: ServiceProtocol {
         }
             
         Service.categories[index].includedTasks.append(task)
+    }
+    
+    func changeTask(oldTask: Task, newTask: Task) {
+        guard let taskIndex = tasks.index(of: oldTask) else {
+            fatalError("No such Task")
+        }
+        
+        tasks[taskIndex] = newTask
     }
     
     func removeTask(task: Task) {}

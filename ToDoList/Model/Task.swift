@@ -1,7 +1,7 @@
 
 import UIKit
 
-struct Task {
+struct Task: Equatable {
     
     //MARK: Properties
     var name: String 

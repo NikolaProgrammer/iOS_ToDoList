@@ -67,6 +67,7 @@
                                             <outlet property="dateLabel" destination="ENb-UW-Hvb" id="IvD-0m-9fL"/>
                                             <outlet property="noteLabel" destination="yfS-VM-Hah" id="kqM-gV-iOM"/>
                                             <outlet property="titleLabel" destination="OMQ-Qu-v0U" id="8Ct-cH-zCz"/>
+                                            <segue destination="rbd-dQ-nCs" kind="show" identifier="ShowTaskDetailsSegue" id="oXc-Jm-Jka"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -105,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="2284" y="769.56521739130437"/>
         </scene>
-        <!--Add Task Table View Controller-->
+        <!--Task Table View Controller-->
         <scene sceneID="3wc-uU-Kb3">
             <objects>
-                <tableViewController id="rbd-dQ-nCs" customClass="AddTaskTableViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="rbd-dQ-nCs" customClass="TaskTableViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" contentViewInsetsToSafeArea="NO" id="r4V-Gh-Ji4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -462,4 +463,7 @@
             <point key="canvasLocation" x="3143" y="424"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cOu-Ij-sqp"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -8,11 +8,13 @@
 
 import UIKit
 
-protocol AddTaskViewControllerDelegate: class {
-    func addTaskViewControllerDidSaveButton(_ view: AddTaskTableViewController)
+protocol TaskViewControllerDelegate: class {
+    func taskViewControllerDidSaveButton(_ view: TaskTableViewController)
+    
+    func taskViewControllerDidCancelButton(_ view: TaskTableViewController)
 }
 
-class AddTaskTableViewController: UITableViewController {
+class TaskTableViewController: UITableViewController {
     
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
@@ -21,15 +23,23 @@ class AddTaskTableViewController: UITableViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var priorityLabel: UILabel!
 
+    var newTask: Task?
     var task: Task?
-    var saveButton: UIBarButtonItem!
     
-    weak var delegate: AddTaskViewControllerDelegate?
+    weak var delegate: TaskViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateLabel.text = Date.string(from: Date(), format: Constants.fullDatePattern)
+        if let task = task {
+            nameTextField.text = task.name
+            reminderSwitch.isOn = task.isReminded
+            dateLabel.text = Date.string(from: task.date, format: Constants.fullDatePattern)
+            priorityLabel.text = task.priority.rawValue
+            notesTextView.text = task.notes
+        } else {
+            dateLabel.text = Date.string(from: Date(), format: Constants.fullDatePattern)
+        }
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
@@ -38,8 +48,7 @@ class AddTaskTableViewController: UITableViewController {
         notesTextView.inputAccessoryView = toolBar
     
         title = "Add Item"
-        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
-        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
 
         self.tableView.tableFooterView = UIView()
@@ -88,24 +97,24 @@ class AddTaskTableViewController: UITableViewController {
     //MARK: Private Methods
     
     @objc private func saveButtonTapped() {
-        let name = nameTextField.text ?? ""
+        let name = nameTextField.text!
         let isReminded = reminderSwitch.isOn
         let date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
         let priority = Priority(rawValue: priorityLabel.text!)!
         let notes = notesTextView.text ?? ""
         
-        task = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
+        newTask = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
         
-        delegate?.addTaskViewControllerDidSaveButton(self)
+        delegate?.taskViewControllerDidSaveButton(self)
     }
     
     @objc private func cancelButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        delegate?.taskViewControllerDidCancelButton(self)
     }
     
     private func updateSaveButtonState() {
         let text = nameTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty 
+        navigationItem.rightBarButtonItem!.isEnabled = !text.isEmpty 
     }
     
     @objc private func closeTextViewKeyboard() {
@@ -117,7 +126,7 @@ class AddTaskTableViewController: UITableViewController {
     
 }
 
-extension AddTaskTableViewController: UITextFieldDelegate {
+extension TaskTableViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         updateSaveButtonState()
