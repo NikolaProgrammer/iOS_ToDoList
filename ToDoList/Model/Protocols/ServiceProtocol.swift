@@ -11,6 +11,6 @@ protocol ServiceProtocol {
     
     func finishTask(task: Task)
     
-    func changeTask(oldTask: Task, newTask: Task)
+    func changeTask(task: Task)
     
 }

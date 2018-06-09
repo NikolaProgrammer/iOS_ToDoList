@@ -73,7 +73,7 @@ class TodayTasksViewController: UIViewController {
 }
 
 //MARK: - UITableViewDataSource
-extension TodayTasksViewController: UITableViewDataSource {
+extension TodayTasksViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todayTasks[section].1.count
@@ -107,30 +107,30 @@ extension TodayTasksViewController: UITableViewDataSource {
 extension TodayTasksViewController: TaskViewControllerDelegate {
     
     func taskViewControllerDidCancelButton(_ view: TaskTableViewController) {
-        if (tableView.indexPathForSelectedRow != nil) {
-            view.navigationController?.popViewController(animated: true)
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
+        hideView(view)
     }
     
-    
-    func taskViewControllerDidSaveButton(_ view: TaskTableViewController) {
-        if (tableView.indexPathForSelectedRow != nil) {
-            Service.shared.changeTask(oldTask: view.task!, newTask: view.newTask!)
-            
-            updateTodayTasks()
-            tableView.reloadData()
-            
-            view.navigationController?.popViewController(animated: true)
+    func taskViewControllerDidSaveButton(_ view: TaskTableViewController, task: Task) {
+        if (navigationController?.viewControllers.contains(view))! {
+            Service.shared.changeTask(task: view.task!)
         } else {
-            Service.shared.addTask(task: view.newTask!)
-            
-            updateTodayTasks()
-            tableView.reloadData()
-            
-            view.dismiss(animated: true, completion: nil)
+            Service.shared.addTask(task: view.task!)
         }
  
+        hideView(view)
+        
+        updateTodayTasks()
+        tableView.reloadData()
+        
+    }
+    
+    private func hideView(_ view: TaskTableViewController) {
+        if (navigationController?.viewControllers.contains(view))! {
+            navigationController?.popViewController(animated: true)
+            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+        } else {
+            view.dismiss(animated: true, completion: nil)
+        }
+
     }
 }

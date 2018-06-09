@@ -49,12 +49,14 @@ class Service: ServiceProtocol {
         Service.categories[index].includedTasks.append(task)
     }
     
-    func changeTask(oldTask: Task, newTask: Task) {
-        guard let taskIndex = tasks.index(of: oldTask) else {
-            fatalError("No such Task")
+    func changeTask(task: Task) {
+        guard let taskIndex = tasks.index(where: { (currentTask) -> Bool in
+            return task.id == currentTask.id
+        }) else {
+            fatalError("No such task")
         }
         
-        tasks[taskIndex] = newTask
+        tasks[taskIndex] = task
     }
     
     func removeTask(task: Task) {}

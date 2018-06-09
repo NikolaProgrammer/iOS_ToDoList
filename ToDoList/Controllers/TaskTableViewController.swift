@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TaskViewControllerDelegate: class {
-    func taskViewControllerDidSaveButton(_ view: TaskTableViewController)
+    func taskViewControllerDidSaveButton(_ view: TaskTableViewController, task: Task)
     
     func taskViewControllerDidCancelButton(_ view: TaskTableViewController)
 }
@@ -23,7 +23,6 @@ class TaskTableViewController: UITableViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var priorityLabel: UILabel!
 
-    var newTask: Task?
     var task: Task?
     
     weak var delegate: TaskViewControllerDelegate?
@@ -31,15 +30,11 @@ class TaskTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let task = task {
-            nameTextField.text = task.name
-            reminderSwitch.isOn = task.isReminded
-            dateLabel.text = Date.string(from: task.date, format: Constants.fullDatePattern)
-            priorityLabel.text = task.priority.rawValue
-            notesTextView.text = task.notes
-        } else {
-            dateLabel.text = Date.string(from: Date(), format: Constants.fullDatePattern)
-        }
+        nameTextField.text = task?.name
+        reminderSwitch.isOn = task?.isReminded ?? false
+        dateLabel.text = Date.string(from: (task?.date ?? Date()), format: Constants.fullDatePattern)
+        priorityLabel.text = task?.priority.rawValue ?? "None"
+        notesTextView.text = task?.notes
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
@@ -104,9 +99,18 @@ class TaskTableViewController: UITableViewController {
         let notes = notesTextView.text ?? ""
         let isFinished = task?.isFinished ?? false
         
-        newTask = Task(name: name, notes: notes, isReminded: isReminded, isFinished: isFinished, date: date, priority: priority, category: Service.categories[0])
-        
-        delegate?.taskViewControllerDidSaveButton(self)
+        if task != nil {
+            task?.name = name
+            task?.isReminded = isReminded
+            task?.date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
+            task?.priority = priority
+            task?.notes = notes
+            task?.isFinished = isFinished
+        } else {
+            task = Task(name: name, notes: notes, isReminded: isReminded, isFinished: isFinished, date: date, priority: priority, category: Service.categories[0])
+        }
+
+        delegate?.taskViewControllerDidSaveButton(self, task: task!)
     }
     
     @objc private func cancelButtonTapped() {
@@ -123,7 +127,6 @@ class TaskTableViewController: UITableViewController {
             notesTextView.resignFirstResponder()
         }
     }
-
     
 }
 
