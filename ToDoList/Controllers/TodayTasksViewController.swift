@@ -12,7 +12,7 @@ class TodayTasksViewController: UIViewController {
     
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
-    var todayTasks: [Task] = []
+    var todayTasks: [(String, [Task])] = []
     
     //MARK: Initializators
     required init?(coder aDecoder: NSCoder) {
@@ -50,7 +50,7 @@ class TodayTasksViewController: UIViewController {
             guard let indexPath = tableView.indexPath(for: selectedTask) else {
                 fatalError("Selected task is not displayed on the screen")
             }
-            destinationController.task = todayTasks[indexPath.row]
+            destinationController.task = todayTasks[indexPath.section].1[indexPath.row]
         default:
             fatalError("Unknown identifier \(String(describing: segue.identifier))")
         }
@@ -76,28 +76,36 @@ class TodayTasksViewController: UIViewController {
 extension TodayTasksViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return todayTasks[section].1.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return todayTasks[section].0
+        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return todayTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier, for: indexPath) as? TaskTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskTableViewCell else {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
-        
-        let task = todayTasks[indexPath.row]
-        
+        let task = todayTasks[indexPath.section].1[indexPath.row]
+
         cell.titleLabel.text = task.name
         cell.noteLabel.text = task.notes
         cell.dateLabel.text = Date.string(from: task.date)
-        
-        
+
         return cell
     }
     
 }
 
 extension TodayTasksViewController: TaskViewControllerDelegate {
+    
     func taskViewControllerDidCancelButton(_ view: TaskTableViewController) {
         if (tableView.indexPathForSelectedRow != nil) {
             view.navigationController?.popViewController(animated: true)

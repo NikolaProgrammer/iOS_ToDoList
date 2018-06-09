@@ -102,8 +102,9 @@ class TaskTableViewController: UITableViewController {
         let date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
         let priority = Priority(rawValue: priorityLabel.text!)!
         let notes = notesTextView.text ?? ""
+        let isFinished = task?.isFinished ?? false
         
-        newTask = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
+        newTask = Task(name: name, notes: notes, isReminded: isReminded, isFinished: isFinished, date: date, priority: priority, category: Service.categories[0])
         
         delegate?.taskViewControllerDidSaveButton(self)
     }

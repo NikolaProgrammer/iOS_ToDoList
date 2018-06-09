@@ -3,7 +3,7 @@ import UIKit
 
 protocol ServiceProtocol {
     
-    func getTodayTasks() -> [Task]
+    func getTodayTasks() -> [(String, [Task])]
     
     func addTask(task: Task)
     
