@@ -18,6 +18,8 @@ class TodayTasksViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        navigationItem.leftBarButtonItem = editButtonItem
+        
         tabBarItem = UITabBarItem(title: "Today", image: UIImage(named: Constants.todaySectionImageName), tag: 0)
     }
     
@@ -25,6 +27,11 @@ class TodayTasksViewController: UIViewController {
         super.viewDidLoad()
         
         updateTodayTasks()
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        tableView.isEditing = !tableView.isEditing
+        super.setEditing(tableView.isEditing, animated: true)
     }
     
     //MARK: Navigation
@@ -74,6 +81,33 @@ class TodayTasksViewController: UIViewController {
 
 //MARK: - UITableViewDataSource
 extension TodayTasksViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let doneAction = UITableViewRowAction(style: .normal, title: "Done") { (rowAction, indexPath) in
+            Service.shared.finishTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
+            self.updateTodayTasks()
+            tableView.reloadData()
+        }
+        
+        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
+            Service.shared.removeTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
+            self.updateTodayTasks()
+            tableView.reloadData()
+        }
+        deleteAction.backgroundColor = .red
+        
+        var rowActions: [UITableViewRowAction] = []
+        rowActions.append(deleteAction)
+        if indexPath.section == 0 {
+            rowActions.append(doneAction)
+        }
+        
+        return rowActions
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todayTasks[section].1.count

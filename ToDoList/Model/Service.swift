@@ -59,11 +59,23 @@ class Service: ServiceProtocol {
         tasks[taskIndex] = task
     }
     
-    func removeTask(task: Task) {}
+    func removeTask(task: Task) {
+        tasks.remove(at: findTask(task: task))
+    }
     
-    func finishTask(task: Task) {}
+    func finishTask(task: Task) {
+        tasks[findTask(task: task)].isFinished = true
+    }
     
     //MARK: Private Methods
+    private func findTask(task: Task) -> Int {
+        guard let index = tasks.index(of: task) else {
+            fatalError("No such task")
+        }
+        
+        return index
+    }
+    
     private func loadDefaultTasks() -> [Task] {
         
         let firstTask = Task(name: "My fist task", notes: "My first note", isReminded: true, isFinished: false, date: Date.date(from: "15.05.2018"), priority: .none, category: Service.categories[0])
