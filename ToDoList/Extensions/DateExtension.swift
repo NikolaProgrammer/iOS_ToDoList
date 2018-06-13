@@ -5,6 +5,14 @@ private let format = "dd.MM.yyyy"
 
 extension Date {
     
+    var midnight: Date {
+        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+    }
+    
+    var tomorrow: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
+    }
+    
     private static func getDateFormatter(pattern: String) -> DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = pattern

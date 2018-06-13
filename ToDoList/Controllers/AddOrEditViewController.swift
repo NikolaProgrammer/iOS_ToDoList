@@ -8,11 +8,13 @@
 
 import UIKit
 
-protocol AddTaskViewControllerDelegate: class {
-    func addTaskViewControllerDidSaveButton(_ view: AddTaskTableViewController)
+protocol AddOrEditViewControllerDelegate: class {
+    func taskViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task)
+    
+    func taskViewControllerDidCancelButton(_ view: AddOrEditViewController)
 }
 
-class AddTaskTableViewController: UITableViewController {
+class AddOrEditViewController: UITableViewController {
     
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
@@ -22,14 +24,17 @@ class AddTaskTableViewController: UITableViewController {
     @IBOutlet weak var priorityLabel: UILabel!
 
     var task: Task?
-    var saveButton: UIBarButtonItem!
     
-    weak var delegate: AddTaskViewControllerDelegate?
+    weak var delegate: AddOrEditViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateLabel.text = Date.string(from: Date(), format: Constants.fullDatePattern)
+        nameTextField.text = task?.name
+        reminderSwitch.isOn = task?.isReminded ?? false
+        dateLabel.text = Date.string(from: (task?.date ?? Date()), format: Constants.fullDatePattern)
+        priorityLabel.text = task?.priority.rawValue ?? "None"
+        notesTextView.text = task?.notes
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
@@ -38,8 +43,7 @@ class AddTaskTableViewController: UITableViewController {
         notesTextView.inputAccessoryView = toolBar
     
         title = "Add Item"
-        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
-        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
 
         self.tableView.tableFooterView = UIView()
@@ -88,36 +92,43 @@ class AddTaskTableViewController: UITableViewController {
     //MARK: Private Methods
     
     @objc private func saveButtonTapped() {
-        let name = nameTextField.text ?? ""
+        let name = nameTextField.text!
         let isReminded = reminderSwitch.isOn
         let date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
         let priority = Priority(rawValue: priorityLabel.text!)!
         let notes = notesTextView.text ?? ""
+        let isFinished = task?.isFinished ?? false
         
-        task = Task(name: name, notes: notes, isReminded: isReminded, date: date, priority: priority, category: Service.categories[0])
-        
-        delegate?.addTaskViewControllerDidSaveButton(self)
+        if task != nil {
+            task?.name = name
+            task?.isReminded = isReminded
+            task?.date = Date.date(from: dateLabel.text!, format: Constants.fullDatePattern)
+            task?.priority = priority
+            task?.notes = notes
+            task?.isFinished = isFinished
+        } else {
+            task = Task(name: name, notes: notes, isReminded: isReminded, isFinished: isFinished, date: date, priority: priority, category: Service.categories[0])
+        }
+
+        delegate?.taskViewControllerDidSaveButton(self, task: task!)
     }
     
     @objc private func cancelButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        delegate?.taskViewControllerDidCancelButton(self)
     }
     
     private func updateSaveButtonState() {
         let text = nameTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty 
+        navigationItem.rightBarButtonItem!.isEnabled = !text.isEmpty 
     }
     
     @objc private func closeTextViewKeyboard() {
-        if notesTextView.isFirstResponder {
-            notesTextView.resignFirstResponder()
-        }
+        notesTextView.resignFirstResponder()
     }
-
     
 }
 
-extension AddTaskTableViewController: UITextFieldDelegate {
+extension AddOrEditViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         updateSaveButtonState()
