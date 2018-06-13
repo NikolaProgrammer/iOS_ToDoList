@@ -49,7 +49,7 @@ class Service: ServiceProtocol {
         Service.categories[index].includedTasks.append(task)
     }
     
-    func changeTask(task: Task) {
+    func updateTask(task: Task) {
         guard let taskIndex = tasks.index(where: { (currentTask) -> Bool in
             return task.id == currentTask.id
         }) else {

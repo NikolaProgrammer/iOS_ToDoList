@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol TaskViewControllerDelegate: class {
-    func taskViewControllerDidSaveButton(_ view: TaskTableViewController, task: Task)
+protocol AddOrEditViewControllerDelegate: class {
+    func taskViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task)
     
-    func taskViewControllerDidCancelButton(_ view: TaskTableViewController)
+    func taskViewControllerDidCancelButton(_ view: AddOrEditViewController)
 }
 
-class TaskTableViewController: UITableViewController {
+class AddOrEditViewController: UITableViewController {
     
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
@@ -25,7 +25,7 @@ class TaskTableViewController: UITableViewController {
 
     var task: Task?
     
-    weak var delegate: TaskViewControllerDelegate?
+    weak var delegate: AddOrEditViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,14 +123,12 @@ class TaskTableViewController: UITableViewController {
     }
     
     @objc private func closeTextViewKeyboard() {
-        if notesTextView.isFirstResponder {
-            notesTextView.resignFirstResponder()
-        }
+        notesTextView.resignFirstResponder()
     }
     
 }
 
-extension TaskTableViewController: UITextFieldDelegate {
+extension AddOrEditViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         updateSaveButtonState()

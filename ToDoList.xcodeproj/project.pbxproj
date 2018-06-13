@@ -10,7 +10,7 @@
 		911205A920AEC25300E3D868 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205A820AEC25300E3D868 /* DateExtension.swift */; };
 		911205AC20AED01000E3D868 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205AB20AED01000E3D868 /* ServiceProtocol.swift */; };
 		911205B020AEEF6A00E3D868 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205AF20AEEF6A00E3D868 /* Constants.swift */; };
-		911205B420B6CA6B00E3D868 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205B320B6CA6B00E3D868 /* TaskTableViewController.swift */; };
+		911205B420B6CA6B00E3D868 /* AddOrEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205B320B6CA6B00E3D868 /* AddOrEditViewController.swift */; };
 		911205B620BC374500E3D868 /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205B520BC374500E3D868 /* DateSelectorViewController.swift */; };
 		911205BB20BD548100E3D868 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205BA20BD548100E3D868 /* Priority.swift */; };
 		911205BD20BFE28200E3D868 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205BC20BFE28200E3D868 /* AboutUsViewController.swift */; };
@@ -51,7 +51,7 @@
 		911205A820AEC25300E3D868 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		911205AB20AED01000E3D868 /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
 		911205AF20AEEF6A00E3D868 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		911205B320B6CA6B00E3D868 /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
+		911205B320B6CA6B00E3D868 /* AddOrEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditViewController.swift; sourceTree = "<group>"; };
 		911205B520BC374500E3D868 /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
 		911205BA20BD548100E3D868 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 		911205BC20BFE28200E3D868 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 			children = (
 				911205BC20BFE28200E3D868 /* AboutUsViewController.swift */,
 				91DB735920A46B180072956D /* TodayTasksViewController.swift */,
-				911205B320B6CA6B00E3D868 /* TaskTableViewController.swift */,
+				911205B320B6CA6B00E3D868 /* AddOrEditViewController.swift */,
 				911205B520BC374500E3D868 /* DateSelectorViewController.swift */,
 			);
 			path = Controllers;
@@ -357,7 +357,7 @@
 			files = (
 				911205B620BC374500E3D868 /* DateSelectorViewController.swift in Sources */,
 				911205BD20BFE28200E3D868 /* AboutUsViewController.swift in Sources */,
-				911205B420B6CA6B00E3D868 /* TaskTableViewController.swift in Sources */,
+				911205B420B6CA6B00E3D868 /* AddOrEditViewController.swift in Sources */,
 				911205B020AEEF6A00E3D868 /* Constants.swift in Sources */,
 				918C636520ADA1930018731C /* Service.swift in Sources */,
 				911205A920AEC25300E3D868 /* DateExtension.swift in Sources */,

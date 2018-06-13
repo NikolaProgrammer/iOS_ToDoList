@@ -31,16 +31,16 @@ class TodayTasksViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        var destinationController: TaskTableViewController
+        var destinationController: AddOrEditViewController
         
         switch segue.identifier {
         case Constants.addTaskSegueIdentifier:
             guard let navigationController = segue.destination as? UINavigationController else {
                 fatalError("Unexpected destination")
             }
-            destinationController = navigationController.topViewController as! TaskTableViewController
+            destinationController = navigationController.topViewController as! AddOrEditViewController
         case Constants.showTaskDetailsIdentifier:
-            guard let destination = segue.destination as? TaskTableViewController else {
+            guard let destination = segue.destination as? AddOrEditViewController else {
                 fatalError("Unexpected destination")
             }
             destinationController = destination
@@ -104,15 +104,15 @@ extension TodayTasksViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-extension TodayTasksViewController: TaskViewControllerDelegate {
+extension TodayTasksViewController: AddOrEditViewControllerDelegate {
     
-    func taskViewControllerDidCancelButton(_ view: TaskTableViewController) {
+    func taskViewControllerDidCancelButton(_ view: AddOrEditViewController) {
         hideView(view)
     }
     
-    func taskViewControllerDidSaveButton(_ view: TaskTableViewController, task: Task) {
+    func taskViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task) {
         if (navigationController?.viewControllers.contains(view))! {
-            Service.shared.changeTask(task: view.task!)
+            Service.shared.updateTask(task: view.task!)
         } else {
             Service.shared.addTask(task: view.task!)
         }
@@ -124,7 +124,7 @@ extension TodayTasksViewController: TaskViewControllerDelegate {
         
     }
     
-    private func hideView(_ view: TaskTableViewController) {
+    private func hideView(_ view: AddOrEditViewController) {
         if (navigationController?.viewControllers.contains(view))! {
             navigationController?.popViewController(animated: true)
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
