@@ -18,14 +18,13 @@ class TodayTasksViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        navigationItem.leftBarButtonItem = editButtonItem
-        
         tabBarItem = UITabBarItem(title: "Today", image: UIImage(named: Constants.todaySectionImageName), tag: 0)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = editButtonItem
         updateTodayTasks()
     }
     
