@@ -14,6 +14,8 @@
 		911205B620BC374500E3D868 /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205B520BC374500E3D868 /* DateSelectorViewController.swift */; };
 		911205BB20BD548100E3D868 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205BA20BD548100E3D868 /* Priority.swift */; };
 		911205BD20BFE28200E3D868 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205BC20BFE28200E3D868 /* AboutUsViewController.swift */; };
+		9116FCFB20D1384D007F102E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9116FCFA20D1384D007F102E /* SearchViewController.swift */; };
+		9154E29E20D25004002E2B25 /* ShowTaskDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9154E29D20D25004002E2B25 /* ShowTaskDetailTableViewController.swift */; };
 		918C636320AD9D640018731C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636220AD9D640018731C /* Task.swift */; };
 		918C636520ADA1930018731C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636420ADA1930018731C /* Service.swift */; };
 		918C636720ADA3E00018731C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636620ADA3E00018731C /* Category.swift */; };
@@ -55,6 +57,8 @@
 		911205B520BC374500E3D868 /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
 		911205BA20BD548100E3D868 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 		911205BC20BFE28200E3D868 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		9116FCFA20D1384D007F102E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9154E29D20D25004002E2B25 /* ShowTaskDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTaskDetailTableViewController.swift; sourceTree = "<group>"; };
 		918C636220AD9D640018731C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		918C636420ADA1930018731C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ToDoList/Model/Service.swift; sourceTree = SOURCE_ROOT; };
 		918C636620ADA3E00018731C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 				91DB735920A46B180072956D /* TodayTasksViewController.swift */,
 				911205B320B6CA6B00E3D868 /* AddOrEditViewController.swift */,
 				911205B520BC374500E3D868 /* DateSelectorViewController.swift */,
+				9116FCFA20D1384D007F102E /* SearchViewController.swift */,
+				9154E29D20D25004002E2B25 /* ShowTaskDetailTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -363,8 +369,10 @@
 				911205A920AEC25300E3D868 /* DateExtension.swift in Sources */,
 				918C636920ADB8AB0018731C /* TaskTableViewCell.swift in Sources */,
 				911205BB20BD548100E3D868 /* Priority.swift in Sources */,
+				9116FCFB20D1384D007F102E /* SearchViewController.swift in Sources */,
 				91DB735A20A46B180072956D /* TodayTasksViewController.swift in Sources */,
 				918C636320AD9D640018731C /* Task.swift in Sources */,
+				9154E29E20D25004002E2B25 /* ShowTaskDetailTableViewController.swift in Sources */,
 				91DB735820A46B180072956D /* AppDelegate.swift in Sources */,
 				918C636720ADA3E00018731C /* Category.swift in Sources */,
 				911205AC20AED01000E3D868 /* ServiceProtocol.swift in Sources */,
