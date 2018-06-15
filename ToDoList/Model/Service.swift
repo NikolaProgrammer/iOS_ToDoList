@@ -41,12 +41,8 @@ class Service: ServiceProtocol {
     
     func addTask(task: Task) {
         tasks.append(task)
-        
-        guard let index = Service.categories.index(of: task.category) else {
-            fatalError("No such category")
-        }
-            
-        Service.categories[index].includedTasks.append(task)
+      
+        Service.categories[findCategory(category: task.category)].includedTasks.append(task)
     }
     
     func updateTask(task: Task) {
@@ -60,17 +56,35 @@ class Service: ServiceProtocol {
     }
     
     func removeTask(task: Task) {
-        tasks.remove(at: findTask(task: task))
+        var taskIndex = findTask(task: task, in: tasks)
+        tasks.remove(at: taskIndex)
+        
+        let categoryIndex = findCategory(category: task.category)
+//        let category = Service.categories[categoryIndex]
+        taskIndex = findTask(task: task, in: Service.categories[categoryIndex].includedTasks)
+        
+        Service.categories[categoryIndex].includedTasks.remove(at: taskIndex)
     }
     
     func finishTask(task: Task) {
-        tasks[findTask(task: task)].isFinished = true
+        tasks[findTask(task: task, in: tasks)].isFinished = true
+        
+        let categoryIndex = findCategory(category: task.category)
+        let taskIndex = findTask(task: task, in: Service.categories[categoryIndex].includedTasks)
+        Service.categories[categoryIndex].includedTasks[taskIndex].isFinished = true
     }
     
     //MARK: Private Methods
-    private func findTask(task: Task) -> Int {
-        guard let index = tasks.index(of: task) else {
-            fatalError("No such task")
+    private func findCategory(category: Category) -> Int {
+        guard let index = Service.categories.index(of: category) else {
+            fatalError("No such category")
+        }
+        
+        return index
+    }
+    private func findTask(task: Task, in array: [Task]) -> Int {
+        guard let index = array.index(of: task) else {
+            fatalError("No such task in array \(array.description)")
         }
         
         return index
