@@ -63,13 +63,8 @@ class SearchViewController: UIViewController {
             fatalError("Selected task is not displayed on the screen")
         }
         
-        let task: Task
-        if !isFiltering() {
-            task = Service.shared.tasks[indexPath.row]
-        } else {
-            task = filteredTasks[indexPath.row]
-        }
-            
+        let task: Task = !isFiltering() ? Service.shared.tasks[indexPath.row] : filteredTasks[indexPath.row]
+
         destinationController.task = task
     }
     
@@ -88,11 +83,10 @@ class SearchViewController: UIViewController {
             let isCompletedTask = (scope == "Completed")
             let doesScopeMatch = (task.isFinished == isCompletedTask)
             
-            if searchBarIsEmpty() {
-                return doesScopeMatch
-            } else {
+            guard searchBarIsEmpty() else {
                 return doesScopeMatch && task.name.lowercased().contains(searchingText.lowercased())
             }
+            return doesScopeMatch
         })
         tableView.reloadData()
     }
@@ -123,12 +117,7 @@ extension SearchViewController: UITableViewDataSource {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
         
-        let task: Task
-        if !isFiltering() {
-            task = Service.shared.tasks[indexPath.row]
-        } else {
-            task = filteredTasks[indexPath.row]
-        }
+        let task: Task = !isFiltering() ? Service.shared.tasks[indexPath.row] : filteredTasks[indexPath.row]
         
         cell.titleLabel.text = task.name
         cell.noteLabel.text = task.notes
