@@ -20,6 +20,39 @@ class Service: ServiceProtocol {
     
     //MARK: ServiceProtocol Methods
     
+    func updateCategory(category: Category) -> Category {
+        return Service.categories[findCategory(category: category)]
+    }
+    
+    func addCategory(category: Category) {
+        Service.categories.append(category)
+    }
+    
+    func removeCategory(category: Category) {
+        for (index, task) in tasks.enumerated() {
+            if category.includedTasks.contains(task) {
+                tasks.remove(at: index)
+            }
+        }
+        
+        Service.categories.remove(at: findCategory(category: category))
+    }
+    
+    func getCategories() -> [(String, [Category])] {
+        var items: [(String, [Category])] = []
+        items.append(("Inbox", [Service.categories[0]]))
+        
+        if Service.categories.count > 1 {
+            var otherCategories: [Category] = []
+            for category in Service.categories[1...] {
+                otherCategories.append(category)
+            }
+            items.append(("Other", otherCategories))
+        }
+        
+        return items
+    }
+    
     func getTodayTasks() -> [(String, [Task])] {
         
         let todayCompletedTasks = tasks.filter { (task) -> Bool in
@@ -39,6 +72,27 @@ class Service: ServiceProtocol {
         return items
     }
     
+    func getTasksByCategory(category: Category) -> [(String, [Task])] {
+        let categoryIndex = findCategory(category: category)
+        let tasks = Service.categories[categoryIndex].includedTasks
+        
+        let todayCompletedTasks = tasks.filter { (task) -> Bool in
+            return task.isFinished
+        }
+        
+        let todayIncopmletedTasks = tasks.filter { (task) -> Bool in
+            return !task.isFinished
+        }
+        
+        var items: [(String, [Task])] = []
+        items.append(("", todayIncopmletedTasks))
+        if !todayCompletedTasks.isEmpty {
+            items.append(("Completed", todayCompletedTasks))
+        }
+        
+        return items
+    }
+    
     func addTask(task: Task) {
         tasks.append(task)
       
@@ -46,13 +100,20 @@ class Service: ServiceProtocol {
     }
     
     func updateTask(task: Task) {
-        guard let taskIndex = tasks.index(where: { (currentTask) -> Bool in
+        guard var taskIndex = tasks.index(where: { (currentTask) -> Bool in
             return task.id == currentTask.id
         }) else {
             fatalError("No such task")
         }
         
         tasks[taskIndex] = task
+        
+        let categoryIndex = findCategory(category: task.category)
+        taskIndex = Service.categories[categoryIndex].includedTasks.index(where: { (currentTask) -> Bool in
+            return task.id == currentTask.id
+        })!
+        
+        Service.categories[categoryIndex].includedTasks[taskIndex] = task
     }
     
     func removeTask(task: Task) {

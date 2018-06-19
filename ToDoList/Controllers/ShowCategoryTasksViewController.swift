@@ -1,48 +1,37 @@
 //
-//  ViewController.swift
+//  ShowCategoryTasksViewController.swift
 //  ToDoList
 //
-//  Created by Nikolay Sereda on 10.05.2018.
+//  Created by Nikolay Sereda on 19.06.2018.
 //  Copyright © 2018 Nikolay Sereda. All rights reserved.
 //
 
 import UIKit
 
-class TodayTasksViewController: UIViewController {
-    
+class ShowCategoryTasksViewController: UIViewController {
+
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
-    var todayTasks: [(String, [Task])] = []
     
-    //MARK: Initializators
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        tabBarItem = UITabBarItem(title: "Today", image: UIImage(named: Constants.todaySectionImageName), tag: 0)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        updateTodayTasks()
-        tableView.reloadData()
-    }
-    
+    var category: Category?
+    var sectionTasks: [(section: String, tasks: [Task])] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = editButtonItem
-        updateTodayTasks()
+        navigationItem.title = category?.name
+        navigationItem.rightBarButtonItems?.append(editButtonItem)
+        updateTasks()
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         tableView.isEditing = !tableView.isEditing
         super.setEditing(tableView.isEditing, animated: true)
     }
-    
-    //MARK: Navigation
+
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
         
         var destinationController: AddOrEditViewController
         
@@ -52,6 +41,7 @@ class TodayTasksViewController: UIViewController {
                 fatalError("Unexpected destination")
             }
             destinationController = navigationController.topViewController as! AddOrEditViewController
+            destinationController.category = category
         case Constants.showTaskDetailsIdentifier:
             guard let destination = segue.destination as? AddOrEditViewController else {
                 fatalError("Unexpected destination")
@@ -63,7 +53,7 @@ class TodayTasksViewController: UIViewController {
             guard let indexPath = tableView.indexPath(for: selectedTask) else {
                 fatalError("Selected task is not displayed on the screen")
             }
-            destinationController.task = todayTasks[indexPath.section].1[indexPath.row]
+            destinationController.task = sectionTasks[indexPath.section].tasks[indexPath.row]
         default:
             fatalError("Unknown identifier \(String(describing: segue.identifier))")
         }
@@ -71,37 +61,53 @@ class TodayTasksViewController: UIViewController {
         destinationController.delegate = self
     }
     
-    //MARK: Actions
-    
-    @IBAction func showAboutUsInformation(_ sender: UIBarButtonItem) {
-       let controller = AboutUsViewController()
-       show(controller, sender: self)
-    }
-    
     //MARK: Private Methods
-    private func updateTodayTasks() {
-        todayTasks = Service.shared.getTodayTasks()
+    
+    private func updateTasks() {
+        sectionTasks = Service.shared.getTasksByCategory(category: category!)
     }
+}
+
+extension ShowCategoryTasksViewController: AddOrEditViewControllerDelegate {
+    func addOrEditViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task) {
+        if (navigationController?.viewControllers.contains(view))! {
+            Service.shared.updateTask(task: task)
+        } else {
+            Service.shared.addTask(task: task)
+        }
+        
+        view.hideView()
+        
+        updateTasks()
+        tableView.reloadData()
+    }
+
+    func addOrEditViewControllerDidCancelButton(_ view: AddOrEditViewController) {
+        view.hideView()
+    }
+
     
 }
 
-//MARK: - UITableViewDataSource
-extension TodayTasksViewController: UITableViewDataSource, UITableViewDelegate {
-
+extension ShowCategoryTasksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let doneAction = UITableViewRowAction(style: .normal, title: "Done") { (rowAction, indexPath) in
-            Service.shared.finishTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
-            self.updateTodayTasks()
+        let task = sectionTasks[indexPath.section].tasks[indexPath.row]
+        
+        let doneAction = UITableViewRowAction(style: .normal, title: "Done") { [weak self] (rowAction, indexPath) in
+            Service.shared.finishTask(task: task)
+            
+            self?.updateTasks()
             tableView.reloadData()
         }
         
-        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
-            Service.shared.removeTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
-            self.updateTodayTasks()
+        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { [weak self] (rowAction, indexPath) in
+            Service.shared.removeTask(task: task)
+            
+            self?.updateTasks()
             tableView.reloadData()
         }
         deleteAction.backgroundColor = .red
@@ -116,52 +122,28 @@ extension TodayTasksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todayTasks[section].1.count
+        return sectionTasks[section].tasks.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return todayTasks[section].0
-        
+        return sectionTasks[section].section
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return todayTasks.count
+        return sectionTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskTableViewCell else {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
-        let task = todayTasks[indexPath.section].1[indexPath.row]
-
+        
+        let task = sectionTasks[indexPath.section].tasks[indexPath.row]
+        
         cell.titleLabel.text = task.name
+        cell.dateLabel.text = Date.string(from: (task.date))
         cell.noteLabel.text = task.notes
-        cell.dateLabel.text = Date.string(from: task.date)
-
+        
         return cell
     }
-    
-}
-
-extension TodayTasksViewController: AddOrEditViewControllerDelegate {
-    
-    func addOrEditViewControllerDidCancelButton(_ view: AddOrEditViewController) {
-        view.hideView()
-    }
-    
-    func addOrEditViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task) {
-        if (navigationController?.viewControllers.contains(view))! {
-            Service.shared.updateTask(task: view.task!)
-        } else {
-            Service.shared.addTask(task: view.task!)
-        }
- 
-        view.hideView()
-        
-        updateTodayTasks()
-        tableView.reloadData()
-        
-    }
-
 }

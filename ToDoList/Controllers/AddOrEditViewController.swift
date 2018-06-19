@@ -9,9 +9,9 @@
 import UIKit
 
 protocol AddOrEditViewControllerDelegate: class {
-    func taskViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task)
+    func addOrEditViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task)
     
-    func taskViewControllerDidCancelButton(_ view: AddOrEditViewController)
+    func addOrEditViewControllerDidCancelButton(_ view: AddOrEditViewController)
 }
 
 class AddOrEditViewController: UITableViewController {
@@ -24,6 +24,7 @@ class AddOrEditViewController: UITableViewController {
     @IBOutlet weak var priorityLabel: UILabel!
 
     var task: Task?
+    var category: Category?
     
     weak var delegate: AddOrEditViewControllerDelegate?
     
@@ -107,14 +108,15 @@ class AddOrEditViewController: UITableViewController {
             task?.notes = notes
             task?.isFinished = isFinished
         } else {
-            task = Task(name: name, notes: notes, isReminded: isReminded, isFinished: isFinished, date: date, priority: priority, category: Service.categories[0])
+            let category = self.category ?? Service.categories[0]
+            task = Task(name: name, notes: notes, isReminded: isReminded, isFinished: isFinished, date: date, priority: priority, category: category)
         }
 
-        delegate?.taskViewControllerDidSaveButton(self, task: task!)
+        delegate?.addOrEditViewControllerDidSaveButton(self, task: task!)
     }
     
     @objc private func cancelButtonTapped() {
-        delegate?.taskViewControllerDidCancelButton(self)
+        delegate?.addOrEditViewControllerDidCancelButton(self)
     }
     
     private func updateSaveButtonState() {
