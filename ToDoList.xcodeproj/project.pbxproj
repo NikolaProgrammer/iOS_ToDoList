@@ -16,6 +16,8 @@
 		911205BD20BFE28200E3D868 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911205BC20BFE28200E3D868 /* AboutUsViewController.swift */; };
 		9116FCFB20D1384D007F102E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9116FCFA20D1384D007F102E /* SearchViewController.swift */; };
 		9154E29E20D25004002E2B25 /* ShowTaskDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9154E29D20D25004002E2B25 /* ShowTaskDetailTableViewController.swift */; };
+		916093F920D8FCCB0028821B /* ShowCategoryTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916093F820D8FCCB0028821B /* ShowCategoryTasksViewController.swift */; };
+		916093FB20D9122B0028821B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916093FA20D9122B0028821B /* UIViewControllerExtension.swift */; };
 		918C636320AD9D640018731C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636220AD9D640018731C /* Task.swift */; };
 		918C636520ADA1930018731C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636420ADA1930018731C /* Service.swift */; };
 		918C636720ADA3E00018731C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636620ADA3E00018731C /* Category.swift */; };
@@ -29,6 +31,9 @@
 		91DB737820A46B1F0072956D /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB737720A46B1F0072956D /* ToDoListUITests.swift */; };
 		91DB738C20A48D140072956D /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DB738A20A48D140072956D /* AboutUsViewController.xib */; };
 		91DB739020A4903D0072956D /* LicenseAgreementLiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DB738E20A4903D0072956D /* LicenseAgreementLiViewController.xib */; };
+		91FED8D520D3CC8C00FD4DD6 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FED8D420D3CC8C00FD4DD6 /* CategoryTableViewCell.swift */; };
+		91FED8D720D3CE4C00FD4DD6 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FED8D620D3CE4C00FD4DD6 /* CategoriesViewController.swift */; };
+		91FED8D920D3E7B500FD4DD6 /* AddCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FED8D820D3E7B500FD4DD6 /* AddCategoryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +64,8 @@
 		911205BC20BFE28200E3D868 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		9116FCFA20D1384D007F102E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9154E29D20D25004002E2B25 /* ShowTaskDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTaskDetailTableViewController.swift; sourceTree = "<group>"; };
+		916093F820D8FCCB0028821B /* ShowCategoryTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCategoryTasksViewController.swift; sourceTree = "<group>"; };
+		916093FA20D9122B0028821B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		918C636220AD9D640018731C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		918C636420ADA1930018731C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ToDoList/Model/Service.swift; sourceTree = SOURCE_ROOT; };
 		918C636620ADA3E00018731C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -78,6 +85,9 @@
 		91DB737920A46B1F0072956D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91DB738A20A48D140072956D /* AboutUsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
 		91DB738E20A4903D0072956D /* LicenseAgreementLiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LicenseAgreementLiViewController.xib; sourceTree = "<group>"; };
+		91FED8D420D3CC8C00FD4DD6 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		91FED8D620D3CE4C00FD4DD6 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
+		91FED8D820D3E7B500FD4DD6 /* AddCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +136,9 @@
 				911205B520BC374500E3D868 /* DateSelectorViewController.swift */,
 				9116FCFA20D1384D007F102E /* SearchViewController.swift */,
 				9154E29D20D25004002E2B25 /* ShowTaskDetailTableViewController.swift */,
+				91FED8D620D3CE4C00FD4DD6 /* CategoriesViewController.swift */,
+				91FED8D820D3E7B500FD4DD6 /* AddCategoryTableViewController.swift */,
+				916093F820D8FCCB0028821B /* ShowCategoryTasksViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -135,6 +148,7 @@
 			children = (
 				918C636820ADB8AB0018731C /* TaskTableViewCell.swift */,
 				911205A520AEC12300E3D868 /* RatingControl.swift */,
+				91FED8D420D3CC8C00FD4DD6 /* CategoryTableViewCell.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -154,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				911205A820AEC25300E3D868 /* DateExtension.swift */,
+				916093FA20D9122B0028821B /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,12 +381,17 @@
 				911205B420B6CA6B00E3D868 /* AddOrEditViewController.swift in Sources */,
 				911205B020AEEF6A00E3D868 /* Constants.swift in Sources */,
 				918C636520ADA1930018731C /* Service.swift in Sources */,
+				91FED8D720D3CE4C00FD4DD6 /* CategoriesViewController.swift in Sources */,
 				911205A920AEC25300E3D868 /* DateExtension.swift in Sources */,
 				918C636920ADB8AB0018731C /* TaskTableViewCell.swift in Sources */,
+				91FED8D520D3CC8C00FD4DD6 /* CategoryTableViewCell.swift in Sources */,
 				911205BB20BD548100E3D868 /* Priority.swift in Sources */,
+				916093F920D8FCCB0028821B /* ShowCategoryTasksViewController.swift in Sources */,
 				9116FCFB20D1384D007F102E /* SearchViewController.swift in Sources */,
+				916093FB20D9122B0028821B /* UIViewControllerExtension.swift in Sources */,
 				91DB735A20A46B180072956D /* TodayTasksViewController.swift in Sources */,
 				918C636320AD9D640018731C /* Task.swift in Sources */,
+				91FED8D920D3E7B500FD4DD6 /* AddCategoryTableViewController.swift in Sources */,
 				9154E29E20D25004002E2B25 /* ShowTaskDetailTableViewController.swift in Sources */,
 				91DB735820A46B180072956D /* AppDelegate.swift in Sources */,
 				918C636720ADA3E00018731C /* Category.swift in Sources */,
