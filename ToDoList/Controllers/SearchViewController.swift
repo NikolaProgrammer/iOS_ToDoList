@@ -64,6 +64,7 @@ class SearchViewController: UIViewController {
         }
         
         let task: Task = !isFiltering() ? Service.shared.tasks[indexPath.row] : filteredTasks[indexPath.row]
+
         destinationController.task = task
     }
     
