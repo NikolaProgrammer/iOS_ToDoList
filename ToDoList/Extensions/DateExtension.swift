@@ -13,6 +13,10 @@ extension Date {
         return Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
     }
     
+    var string: String {
+        return Date.string(from: self)
+    }
+    
     private static func getDateFormatter(pattern: String) -> DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = pattern
@@ -28,3 +32,4 @@ extension Date {
     }
     
 }
+

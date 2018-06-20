@@ -50,7 +50,7 @@ class CategoriesViewController: UIViewController {
             guard let destinationController = segue.destination as? ShowCategoryTasksViewController else {
                 fatalError("Unexpected destination \(segue.destination)")
             }
-            guard let selectedTask = sender as? CategoryTableViewCell else {
+            guard let selectedTask = sender as? CategoryCell else {
                 fatalError("Unexpected sender")
             }
             guard let indexPath = tableView.indexPath(for: selectedTask) else {
@@ -107,7 +107,7 @@ extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.categoryTableViewCellIdentifier) as? CategoryTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.categoryTableViewCellIdentifier) as? CategoryCell else {
             fatalError("Cell is not a instance of a CategoryTableViewCell")
         }
         
