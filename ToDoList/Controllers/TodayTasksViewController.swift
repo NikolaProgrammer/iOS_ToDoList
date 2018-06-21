@@ -57,7 +57,7 @@ class TodayTasksViewController: UIViewController {
                 fatalError("Unexpected destination")
             }
             destinationController = destination
-            guard let selectedTask = sender as? TaskTableViewCell else {
+            guard let selectedTask = sender as? TaskCell else {
                 fatalError("Unexpected sender \(String(describing: sender))")
             }
             guard let indexPath = tableView.indexPath(for: selectedTask) else {
@@ -130,7 +130,7 @@ extension TodayTasksViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskCell else {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
         let task = todayTasks[indexPath.section].1[indexPath.row]

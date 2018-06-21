@@ -47,7 +47,7 @@ class ShowCategoryTasksViewController: UIViewController {
                 fatalError("Unexpected destination")
             }
             destinationController = destination
-            guard let selectedTask = sender as? TaskTableViewCell else {
+            guard let selectedTask = sender as? TaskCell else {
                 fatalError("Unexpected sender \(String(describing: sender))")
             }
             guard let indexPath = tableView.indexPath(for: selectedTask) else {
@@ -134,7 +134,7 @@ extension ShowCategoryTasksViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskCell else {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
         

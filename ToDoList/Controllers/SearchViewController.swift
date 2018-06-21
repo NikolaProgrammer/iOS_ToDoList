@@ -55,7 +55,7 @@ class SearchViewController: UIViewController {
             fatalError("Unexpected destination \(String(describing: segue.identifier))")
         }
         
-        guard let selectedTask = sender as? TaskTableViewCell else {
+        guard let selectedTask = sender as? TaskCell else {
             fatalError("Unexpected sender \(String(describing: sender))")
         }
         
@@ -113,7 +113,7 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskTableViewCellIdentifier) as? TaskCell else {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
         

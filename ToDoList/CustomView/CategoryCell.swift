@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoryTableViewCell: UITableViewCell {
+class CategoryCell: UITableViewCell {
 
     //MARK: Properties
     @IBOutlet weak var categoryNameLabel: UILabel!
