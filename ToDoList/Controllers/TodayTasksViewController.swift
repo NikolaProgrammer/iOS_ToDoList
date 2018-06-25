@@ -80,7 +80,7 @@ class TodayTasksViewController: UIViewController {
     
     //MARK: Private Methods
     private func updateTodayTasks() {
-        todayTasks = Service.shared.getTodayTasks()
+        todayTasks = service.getTodayTasks()
     }
     
 }
@@ -94,13 +94,13 @@ extension TodayTasksViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let doneAction = UITableViewRowAction(style: .normal, title: "Done") { (rowAction, indexPath) in
-            Service.shared.finishTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
+            self.service.finishTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
             self.updateTodayTasks()
             tableView.reloadData()
         }
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
-            Service.shared.removeTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
+            self.service.removeTask(task: self.todayTasks[indexPath.section].1[indexPath.row])
             self.updateTodayTasks()
             tableView.reloadData()
         }
@@ -152,9 +152,9 @@ extension TodayTasksViewController: AddOrEditViewControllerDelegate {
     
     func addOrEditViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task) {
         if (navigationController?.viewControllers.contains(view))! {
-            Service.shared.updateTask(task: view.task!)
+            service.updateTask(task: view.task!)
         } else {
-            Service.shared.addTask(task: view.task!)
+            service.addTask(task: view.task!)
         }
  
         view.hideView()

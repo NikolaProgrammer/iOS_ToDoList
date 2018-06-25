@@ -10,6 +10,10 @@ import UIKit
 
 extension UIViewController {
     
+    var service: ServiceProtocol {
+        return ServiceFactory.service!
+    }
+    
     func hideView() {
         if ((navigationController?.viewControllers.count)! > 1) {
             navigationController?.popViewController(animated: true)

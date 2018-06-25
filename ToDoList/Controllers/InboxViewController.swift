@@ -32,10 +32,10 @@ class InboxViewController: UIViewController {
     private func updateTasksSection() {
         switch sectionSegmentControl.selectedSegmentIndex {
         case 0:
-            tasks = InboxHelper.getTasks(by: \Task.date.string)
+            tasks = InboxHelper.getTasks(by: \Task.date.string, from: service.tasks)
             tableView.reloadData()
         case 1:
-            tasks = InboxHelper.getTasks(by: \Task.category.name)
+            tasks = InboxHelper.getTasks(by: \Task.category.name, from: service.tasks)
             tableView.reloadData()
         default:
             fatalError("Unknown segment index \(sectionSegmentControl.selectedSegmentIndex)")
@@ -51,7 +51,7 @@ extension InboxViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            Service.shared.removeTask(task: tasks[indexPath.section].tasks[indexPath.row])
+            service.removeTask(task: tasks[indexPath.section].tasks[indexPath.row])
             tableView.reloadData()
             updateTasksSection()
         }

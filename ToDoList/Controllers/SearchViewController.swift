@@ -63,7 +63,7 @@ class SearchViewController: UIViewController {
             fatalError("Selected task is not displayed on the screen")
         }
         
-        let task: Task = !isFiltering() ? Service.shared.tasks[indexPath.row] : filteredTasks[indexPath.row]
+        let task: Task = !isFiltering() ? service.tasks[indexPath.row] : filteredTasks[indexPath.row]
 
         destinationController.task = task
     }
@@ -79,7 +79,7 @@ class SearchViewController: UIViewController {
     }
     
     private func filterContentForSearchText(_ searchingText: String, scope: String) {
-        filteredTasks = Service.shared.tasks.filter({ (task) -> Bool in
+        filteredTasks = service.tasks.filter({ (task) -> Bool in
             let isCompletedTask = (scope == "Completed")
             let doesScopeMatch = (task.isFinished == isCompletedTask)
             
@@ -117,7 +117,7 @@ extension SearchViewController: UITableViewDataSource {
             fatalError("Cell is not a instance of a TaskTableViewCell")
         }
         
-        let task: Task = !isFiltering() ? Service.shared.tasks[indexPath.row] : filteredTasks[indexPath.row]
+        let task: Task = !isFiltering() ? service.tasks[indexPath.row] : filteredTasks[indexPath.row]
         
         cell.titleLabel.text = task.name
         cell.noteLabel.text = task.notes
@@ -128,7 +128,7 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !isFiltering() {
-            return Service.shared.tasks.count
+            return service.tasks.count
         }
         return filteredTasks.count
     }

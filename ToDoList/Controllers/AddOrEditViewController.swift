@@ -108,7 +108,7 @@ class AddOrEditViewController: UITableViewController {
             task?.notes = notes
             task?.isFinished = isFinished
         } else {
-            let category = self.category ?? Service.categories[0]
+            let category = self.category ?? service.categories[0]
             task = Task(name: name, notes: notes, isReminded: isReminded, isFinished: isFinished, date: date, priority: priority, category: category)
         }
 
