@@ -3,6 +3,9 @@ import UIKit
 
 protocol ServiceProtocol {
     
+    var tasks: [Task] { get set }
+    var categories: [Category] { get set }
+    
     func getTodayTasks() -> [(String, [Task])]
     func getTasksByCategory(category: Category) -> [(String, [Task])]
     func addTask(task: Task)
@@ -14,5 +17,5 @@ protocol ServiceProtocol {
     func addCategory(category: Category)
     func removeCategory(category: Category)
     func getCategories() -> [(String, [Category])]
-    func updateCategory(category: Category) -> Category
+//    func updateCategory(category: Category) -> Category
 }

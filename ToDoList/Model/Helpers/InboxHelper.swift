@@ -10,10 +10,10 @@ import Foundation
 
 class InboxHelper {
     
-    static func getTasks(by section: KeyPath<Task, String>) -> [(String, [Task])] {
+    static func getTasks(by section: KeyPath<Task, String>, from tasks: [Task]) -> [(String, [Task])] {
         var items: [(name: String, tasks: [Task])] = []
         
-        for task in Service.shared.tasks {
+        for task in tasks {
             let sectionName = task[keyPath: section]
             
             let isContainsCheker: ((name: String, tasks: [Task])) -> Bool = { (item) -> Bool in

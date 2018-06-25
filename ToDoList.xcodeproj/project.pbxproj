@@ -24,6 +24,8 @@
 		918C636520ADA1930018731C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636420ADA1930018731C /* Service.swift */; };
 		918C636720ADA3E00018731C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636620ADA3E00018731C /* Category.swift */; };
 		918C636920ADB8AB0018731C /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C636820ADB8AB0018731C /* TaskCell.swift */; };
+		918F96DF20DCDD15007C3287 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F96DE20DCDD15007C3287 /* FileService.swift */; };
+		918F96E220DCEF04007C3287 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F96E120DCEF04007C3287 /* ServiceFactory.swift */; };
 		91DB735820A46B180072956D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB735720A46B180072956D /* AppDelegate.swift */; };
 		91DB735A20A46B180072956D /* TodayTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB735920A46B180072956D /* TodayTasksViewController.swift */; };
 		91DB735D20A46B180072956D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91DB735B20A46B180072956D /* Main.storyboard */; };
@@ -74,6 +76,8 @@
 		918C636420ADA1930018731C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ToDoList/Model/Service.swift; sourceTree = SOURCE_ROOT; };
 		918C636620ADA3E00018731C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		918C636820ADB8AB0018731C /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		918F96DE20DCDD15007C3287 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		918F96E120DCEF04007C3287 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
 		91DB735420A46B180072956D /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DB735720A46B180072956D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91DB735920A46B180072956D /* TodayTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTasksViewController.swift; sourceTree = "<group>"; };
@@ -122,10 +126,12 @@
 		911205A120AEC0C100E3D868 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				918F96E020DCEECD007C3287 /* Factories */,
 				9160940220DA632E0028821B /* Helpers */,
 				911205B920BD545C00E3D868 /* Enums */,
 				911205AA20AECFBC00E3D868 /* Protocols */,
 				918C636420ADA1930018731C /* Service.swift */,
+				918F96DE20DCDD15007C3287 /* FileService.swift */,
 				918C636220AD9D640018731C /* Task.swift */,
 				918C636620ADA3E00018731C /* Category.swift */,
 			);
@@ -201,6 +207,14 @@
 				9160940320DA63400028821B /* InboxHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		918F96E020DCEECD007C3287 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				918F96E120DCEF04007C3287 /* ServiceFactory.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		91DB734B20A46B180072956D = {
@@ -398,7 +412,9 @@
 				91FED8D720D3CE4C00FD4DD6 /* CategoriesViewController.swift in Sources */,
 				9160940420DA63400028821B /* InboxHelper.swift in Sources */,
 				911205A920AEC25300E3D868 /* DateExtension.swift in Sources */,
+				918F96E220DCEF04007C3287 /* ServiceFactory.swift in Sources */,
 				9160940120DA48B20028821B /* InboxViewController.swift in Sources */,
+				918F96DF20DCDD15007C3287 /* FileService.swift in Sources */,
 				918C636920ADB8AB0018731C /* TaskCell.swift in Sources */,
 				91FED8D520D3CC8C00FD4DD6 /* CategoryCell.swift in Sources */,
 				911205BB20BD548100E3D868 /* Priority.swift in Sources */,

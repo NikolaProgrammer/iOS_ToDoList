@@ -64,16 +64,16 @@ class ShowCategoryTasksViewController: UIViewController {
     //MARK: Private Methods
     
     private func updateTasks() {
-        sectionTasks = Service.shared.getTasksByCategory(category: category!)
+        sectionTasks = service.getTasksByCategory(category: category!)
     }
 }
 
 extension ShowCategoryTasksViewController: AddOrEditViewControllerDelegate {
     func addOrEditViewControllerDidSaveButton(_ view: AddOrEditViewController, task: Task) {
         if (navigationController?.viewControllers.contains(view))! {
-            Service.shared.updateTask(task: task)
+            service.updateTask(task: task)
         } else {
-            Service.shared.addTask(task: task)
+            service.addTask(task: task)
         }
         
         view.hideView()
@@ -98,14 +98,14 @@ extension ShowCategoryTasksViewController: UITableViewDataSource, UITableViewDel
         let task = sectionTasks[indexPath.section].tasks[indexPath.row]
         
         let doneAction = UITableViewRowAction(style: .normal, title: "Done") { [weak self] (rowAction, indexPath) in
-            Service.shared.finishTask(task: task)
+            self?.service.finishTask(task: task)
             
             self?.updateTasks()
             tableView.reloadData()
         }
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { [weak self] (rowAction, indexPath) in
-            Service.shared.removeTask(task: task)
+            self?.service.removeTask(task: task)
             
             self?.updateTasks()
             tableView.reloadData()

@@ -65,13 +65,13 @@ class CategoriesViewController: UIViewController {
     
     //MARK: Private Methods
     private func updateCategories() {
-        categories = Service.shared.getCategories()
+        categories = service.getCategories()
     }
 }
 
 extension CategoriesViewController: AddCategoryTableViewControllerDelegate {
     func addCategoryTableViewControllerDidSaveButton(_ view: AddCategoryTableViewController, category: Category) {
-        Service.shared.addCategory(category: category)
+        service.addCategory(category: category)
         updateCategories()
         tableView.reloadData()
         
@@ -88,7 +88,7 @@ extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            Service.shared.removeCategory(category: categories[indexPath.section].categories[indexPath.row])
+            service.removeCategory(category: categories[indexPath.section].categories[indexPath.row])
             updateCategories()
             tableView.reloadData()
         }
